@@ -27,10 +27,11 @@
                         <li><a href="">Contact me</a></li>
                     </ul>
                 </nav>
+                <div class="greeting">Welcome</div>
             </header>
             <section class="hero-sections">
                 <div>
-                    <div class="hero-title"> &gt; &nbsp <span id="element"></span></div>
+                    <div class="hero-title"> &gt; <span class="addition-space">&nbsp</span> <span id="element"></span></div>
                     <p class="small-desc">I am a professional full-stack web developer experienced in Laravel, React, Next.js, and WordPress. I specialize in building scalable, user-friendly web applications and custom solutions tailored to business needs.</p>
                 </div>
                 <div class="computer-image">
@@ -152,6 +153,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="see-more-container">
+                    <a href="" class="btn btn-primary see-more-button">See More</a>
+                </div>
             </section>
 
             <section class="about-section">
@@ -197,8 +201,10 @@
                         <div class="content-container">
                             <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span></div>
                             <h4 class="title">what is a javascript?</h4>
-                            <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites on the World Wide Web use JavaScript on the client side for webpage behavior.</div>
-                            <div class="timestamp">15 min ago</div>
+                            <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites...
+                            <a href="" class="link">Read more</a>
+                            </div>
+                            <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
                         </div>
                     </div>
                     <div class="blog">
@@ -208,8 +214,10 @@
                         <div class="content-container">
                             <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span></div>
                             <h4 class="title">what is a javascript?</h4>
-                            <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites on the World Wide Web use JavaScript on the client side for webpage behavior.</div>
-                            <div class="timestamp">15 min ago</div>
+                            <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites...
+                            <a href="" class="link">Read more</a>
+                            </div>
+                            <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
                         </div>
                     </div>
                     <div class="blog">
@@ -219,12 +227,52 @@
                         <div class="content-container">
                             <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span></div>
                             <h4 class="title">what is a javascript?</h4>
-                            <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites on the World Wide Web use JavaScript on the client side for webpage behavior.</div>
-                            <div class="timestamp">15 min ago</div>
+                            <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites...
+                            <a href="" class="link">Read more</a>    
+                            </div>
+                            <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
                         </div>
                     </div>
                 </div>
+                <div class="see-more-container">
+                    <a href="" class="btn btn-primary see-more-button">See More</a>
+                </div>
             </section>
+            <section class="contact-section">
+                <div class="section-title-and-desc">
+                    <h1 class="section-title">Contact Me</h1>
+                    <p class="section-desc">Send me a private message</p>
+                </div>
+                <div class="contact-container">
+                    <div class="left-side">
+                        <div class="represent-image"><img src="/assets/images/contact.png" alt=""></div>
+                    </div>
+                    <div class="right-side">
+                        <form action="">
+                            <div class="form-field">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" placeholder="Subject" name="subject">
+                            </div>
+                            <div class="form-field">
+                                <label for="full_name">Full Name</label>
+                                <input type="text" id="full_name" placeholder="Full Name" name="full_name">
+                            </div>
+                            <div class="form-field">
+                                <label for="email">Email</label>
+                                <input type="text" id="email" placeholder="Email" name="email">
+                            </div>
+                            <div class="form-field">
+                                <label for="message">Message</label>
+                                <textarea name="message" id="message" placeholder="Message..."></textarea>
+                            </div>
+                            <div class="form-field submit-button-container">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <footer>Made with <i class="fa-solid fa-heart"></i> by Pial Hossen &copy; {{ date('Y') }} </footer>
 
             <script src="/assets/js/typed.js"></script>
 
