@@ -24,6 +24,8 @@
 
     /* --primary-btn-hover-border-bg-color: rgb(239 248 255); */
     --primary-btn-hover-border-bg-color: rgb(240 239 255);
+
+    --link-color: rgb(92 81 255);
 }
 body {
     background-color: var(--primary-body-color);
@@ -31,7 +33,7 @@ body {
     font-size: 20px;
     font-family: "Saira Semi Condensed", sans-serif;
 }
-.container {
+.main-container {
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -236,6 +238,7 @@ nav ul li:hover {
     outline: 5px solid var(--outline-default-color);
     overflow: hidden;
     border-radius: 5px;
+    display: block;
 }
 .portfolio .image-container img {
     min-width: 500px;
@@ -255,7 +258,7 @@ nav ul li:hover {
 .section-desc {
     text-align: center;
     margin: 0;
-    margin-bottom: 50px;
+    margin-bottom: 12px;
 }
 .details-container {
     display: flex;
@@ -348,6 +351,7 @@ nav ul li:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 .about-section .about-me-container .image-container img{
     background-color: white;
@@ -551,8 +555,50 @@ footer{
     padding: 20px 0;
     text-align: center;
 }
+.main-title{
+    margin-top: 30px;
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+.back-to-home{
+    display: inline-flex;
+    margin-bottom: 50px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.back-to-home a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.back-to-home a:hover{
+    color: var(--link-color);
+}
+.blog-container-all{
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+.blog-all{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.blog-all .feature-image{
+    width: 40%;
+    height: 100%;
+}
+.blog-all .feature-image img{
+    height: 100%;
+    object-fit: cover;
+    background-color: black;
+}
+.blog-all .content-container{
+    max-width: 60%;
+}
 @media screen and (max-width: 1100px) {
-    .container {
+    .main-container {
         max-width: 90vw;
     }
     .portfolio .image-container img {
@@ -563,6 +609,15 @@ footer{
     }
     .blog-container {
         grid-template-columns: 1fr 1fr;
+    }
+    .blog-container-all {
+        grid-template-columns: 1fr;
+    }
+    .blog-all .feature-image{
+        width: 50%;
+    }
+    .blog-all .content-container{
+        max-width: 50%;
     }
     .submit-button-container button {
         width: 80px;
@@ -695,6 +750,21 @@ footer{
     .CTA-button a {
         padding: 5px;
         border-radius: 3px;
+    }
+    .blog-all{
+        flex-direction: column;
+    }
+    .blog-all .feature-image{
+        width: 100%;
+    }
+    .blog-all .content-container{
+        max-width: 100%;
+    }
+    .main-title{
+        font-size: 30px;
+    }
+    .portfolio .image-container {
+        height: 300px;
     }
 }
 @media screen and (max-width: 485px) {

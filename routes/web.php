@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SiteController::class, 'home'])->name('home');
+Route::get('/portfolios', [SiteController::class, 'portfolios'])->name('portfolios');
+Route::get('/blogs', [SiteController::class, 'blogs'])->name('blogs');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
