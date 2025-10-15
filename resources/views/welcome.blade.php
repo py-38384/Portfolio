@@ -68,7 +68,7 @@
                 </div>
                 <div class="details-container">
                     <div class="category">E-Commerce</div>
-                    <h5 class="title">Multi Vendor E-Commerce</h5>
+                    <a href="/portfolios/1" class="title">Multi Vendor E-Commerce</a>
                     <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eius odit dolorem voluptate vel rem pariatur? Ratione praesentium beatae corporis illo ut repellat, libero nihil. Laborum illo esse maiores nostrum!</div>
                     <div class="technologis">
                         <span class="technology">HTML</span>
@@ -86,10 +86,10 @@
                     <a class="image-container" href="/assets/images/Smart-Learning.png">
                         <img src="/assets/images/Smart-Learning.png" alt="">
                     </a>
-                </div>
+                </div>  
                 <div class="details-container">
                     <div class="category">E-Learning</div>
-                    <h5 class="title">A Fontend Design For A E-Learning Platform</h5>
+                    <a href="/portfolios/1" class="title">A Fontend Design For A E-Learning Platform</a>
                     <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eius odit dolorem voluptate vel rem pariatur? Ratione praesentium beatae corporis illo ut repellat, libero nihil. Laborum illo esse maiores nostrum!</div>
                     <div class="technologis">
                         <span class="technology">HTML</span>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="details-container">
                     <div class="category">E-Commerce</div>
-                    <h5 class="title">A Organic Beauty Product Selling E-Commerce Website</h5>
+                    <a href="/portfolios/1" class="title">A Organic Beauty Product Selling E-Commerce Website</a>
                     <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eius odit dolorem voluptate vel rem pariatur? Ratione praesentium beatae corporis illo ut repellat, libero nihil. Laborum illo esse maiores nostrum!</div>
                     <div class="technologis">
                         <span class="technology">HTML</span>
@@ -171,9 +171,9 @@
                 </div>
                 <div class="content-container">
                     <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span></div>
-                    <h4 class="title">what is a javascript?</h4>
+                    <a href="{{ route('blogs.details',1) }}" class="title">what is a javascript?</a>
                     <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites...
-                    <a href="" class="link">Read more</a>
+                    <a href="{{ route('blogs.details',1) }}" class="link">Read more</a>
                     </div>
                     <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
                 </div>
@@ -184,9 +184,9 @@
                 </div>
                 <div class="content-container">
                     <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span></div>
-                    <h4 class="title">what is a javascript?</h4>
+                    <a href="{{ route('blogs.details',1) }}" class="title">what is a javascript?</a>
                     <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites...
-                    <a href="" class="link">Read more</a>
+                    <a href="{{ route('blogs.details',1) }}" class="link">Read more</a>
                     </div>
                     <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
                 </div>
@@ -197,9 +197,9 @@
                 </div>
                 <div class="content-container">
                     <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span></div>
-                    <h4 class="title">what is a javascript?</h4>
+                    <a href="{{ route('blogs.details',1) }}" class="title">what is a javascript?</a>
                     <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites...
-                    <a href="" class="link">Read more</a>    
+                    <a href="{{ route('blogs.details',1) }}" class="link">Read more</a>    
                     </div>
                     <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
                 </div>
@@ -247,4 +247,14 @@
 
     <section>
     </section>
+
+    @push('scripts')
+    <script src="/assets/js/typed.js"></script>
+    <script>
+        var typed = new Typed('#element', {
+        strings: ['Pial Hossen'],
+        typeSpeed: 150,
+        });
+    </script>
+    @endpush
 </x-guest-layout>

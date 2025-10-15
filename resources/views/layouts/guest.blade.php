@@ -18,6 +18,12 @@
         <!-- Magnific Popup core JS file -->
         <script src="{{ asset('assets/magnific_popup/jquery.magnific-popup.min.js') }}"></script>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+
+
+        @stack('styles')
 
         <!-- Styles / Scripts -->
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -29,13 +35,7 @@
             {{ $slot }}
             <x-custom.footer />
         </div>
-        <script src="/assets/js/typed.js"></script>
-        <script>
-            var typed = new Typed('#element', {
-            strings: ['Pial Hossen'],
-            typeSpeed: 150,
-            });
-        </script>
+        @stack('scripts')
         <script src="{{ asset('assets/js/main.js') }}"></script>
     </body>
 </html>

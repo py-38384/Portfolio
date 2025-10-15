@@ -10,9 +10,16 @@ class SiteController extends Controller
         return view('welcome');
     }
     public function portfolios(){
-        return view('portfolio');
+        return view('projects.portfolio');
+    }
+    public function portfolios_details($id){
+        return view('projects.details');
     }
     public function blogs(){
         return view('blogs');
     }
+    public function blogs_details($id){
+        return view('blog.details');
+    }
+    
 }

@@ -8,5 +8,5 @@
             <li><a href="">Contact me</a></li>
         </ul>
     </nav>
-    <div class="greeting">Welcome</div>
+    <a href="/" class="greeting">Welcome</a>
 </header>
