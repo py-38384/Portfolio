@@ -21,5 +21,7 @@ class SiteController extends Controller
     public function blogs_details($id){
         return view('blog.details');
     }
-    
+    public function test(){
+        return view('test');
+    }
 }

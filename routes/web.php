@@ -1,15 +1,20 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SiteController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageUploadController;
 
 Route::get('/', [SiteController::class, 'home'])->name('home');
 Route::get('/portfolios', [SiteController::class, 'portfolios'])->name('portfolios');
 Route::get('/portfolios/{id}', [SiteController::class, 'portfolios_details'])->name('portfolios.details');
 Route::get('/blogs/{id}', [SiteController::class, 'blogs_details'])->name('blogs.details');
 Route::get('/blogs', [SiteController::class, 'blogs'])->name('blogs');
+Route::get('/test', [SiteController::class, 'test'])->name('test');
+
+Route::post('/upload-image', [ImageUploadController::class, 'uploadFile']);
+Route::post('/fetch-image', [ImageUploadController::class, 'uploadByUrl']);
 
 Route::middleware(['auth', 'verified'])->group(function (){
     Route::get('/dashboard', [BackendController::class, 'dashboard'])->name('dashboard');

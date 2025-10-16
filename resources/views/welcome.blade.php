@@ -206,7 +206,7 @@
             </div>
         </div>
         <div class="see-more-container">
-            <a href="{{ route('blogs') }}" class="btn btn-primary see-more-button">See More</a>
+            <a href="{{ route('blogs.index') }}" class="btn btn-primary see-more-button">See More</a>
         </div>
     </section>
 
