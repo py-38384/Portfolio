@@ -7,12 +7,12 @@
 
   <div class="form-container">
     <div class="form-card">
-      <div class="form-title">Add New Project</div>
 
       <form>
         <div class="form-group">
-          <label>Project Title</label>
-          <input type="text" placeholder="Enter project title">
+            <x-input-label for="project_title" :value="__('Project Title')" />
+            <x-text-input id="project_title" name="project_title" type="text" class="mt-1 block w-full" :value="old('project_title')" required autofocus autocomplete="project_title" />
+            <x-input-error class="mt-2" :messages="$errors->get('project_title')" />
         </div>
 
         <div class="form-group">
@@ -34,7 +34,7 @@
 
         <div class="form-group">
           <label>Detailed Description</label>
-          <x-wysiwyg/>
+          <div id="editorjs"></div>
         </div>
 
         <div class="form-group">
@@ -51,4 +51,10 @@
       </form>
     </div>
   </div>
+
+  @section('scripts')
+    <script>
+
+    </script>
+  @endsection
 </x-app-layout>
