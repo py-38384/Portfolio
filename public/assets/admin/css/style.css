@@ -298,6 +298,26 @@ textarea {
 .gallery-placeholder:hover .hoverEffect{
     display: flex;
 }
+.gallery-placeholder .remove-button{
+    width: 25px;
+    height: 25px;
+    color: black;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.gallery-placeholder .remove-button:hover{
+    background-color: white;
+}
+.gallery-placeholder .remove-button:active{
+    background-color: red;
+    color: white;
+}
 .gallery-image-container{
     display: flex;
     flex-direction: column;

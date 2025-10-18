@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class BackendController extends Controller
@@ -15,7 +16,21 @@ class BackendController extends Controller
     public function projects_create(){
         return view('admin.projects.form');
     }
-    public function projects_store(){
+    public function projects_store(Request $request){
+        
+        $request->validate([
+            'project_title' => 'required',
+            'short_description' => 'required',
+            'description' => 'required',
+            'status' => 'required|string',
+        ]);
+
+        
+
+        $project = Project::create([
+
+        ]);
+        
         return "projects_store";
     }
     public function projects_edit(){

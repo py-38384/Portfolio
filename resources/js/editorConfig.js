@@ -60,7 +60,7 @@ class HtmlViewTool {
 }
 
 if(editorjs){
-    const editor = new EditorJS({
+    window.editor = new EditorJS({
         holder: "editorjs",
         tools: {
             header: {
@@ -174,17 +174,21 @@ if(editorjs){
             htmlview: HtmlViewTool,
         }
     });
-    const saveBtn = document.querySelector("#save");
-    if(saveBtn){
-        saveBtn.addEventListener("click", () => {
-            editor
-                .save()
-                .then((outputData) => {
-                    console.log("Article data: ", outputData);
-                })
-                .catch((error) => {
-                    console.log("Saving failed: ", error);
-                });
-        });
-    }
+    setInterval(async () => {
+        try {
+        const content = await window.editor.save();
+        localStorage.setItem('editorContent', JSON.stringify(content));
+        } catch (err) {
+            // 
+        }
+    }, 5000);
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      const saved = localStorage.getItem('editorContent');
+      if (saved) {
+        const data = JSON.parse(saved);
+        await window.editor.isReady;
+        window.editor.render(data);
+      }
+    });
 }

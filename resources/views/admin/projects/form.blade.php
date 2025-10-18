@@ -8,7 +8,8 @@
   <div class="form-container">
     <div class="form-card">
 
-      <form>
+      <form action="{{ route('projects.store') }}" method="post" onsubmit="handleFormSubmit(event)" enctype="multipart/form-data">
+        @csrf
         <div class="form-group">
           <x-input-label for="project_title" :value="__('Project Title')" />
           <x-text-input id="project_title" name="project_title" type="text" class="mt-1 block w-full"
@@ -26,6 +27,7 @@
             <span class="hoverEffect"><i class="fa-solid fa-camera-retro"></i></span>
           </label>
           <input type="file" style="display: none;" name="hero_image" id="hero_image">
+          <x-input-error class="mt-2" :messages="$errors->get('hero_image')" />
         </div>
 
         <div class="form-group">
@@ -49,27 +51,32 @@
             </div>
             <input type="file" style="display: none;" id="gallery_image" name="gallery_image[]" accept="image/*"
               multiple>
+            <x-input-error class="mt-2" :messages="$errors->get('gallery_image')" />
           </div>
         </div>
 
         <div class="form-group">
           <label>Short Description</label>
-          <textarea class="short-desc" placeholder="Write a short summary..."></textarea>
+          <textarea class="short-desc" name="short_description" placeholder="Write a short summary...">{{ old('short_description') }}</textarea>
+          <x-input-error class="mt-2" :messages="$errors->get('short_description')" />
         </div>
 
         <div class="form-group">
           <label>Detailed Description</label>
           <div id="editorjs"></div>
+          <input type="hidden" name="description" value="{{ old('description') }}" id="description">
+          <x-input-error class="mt-2" :messages="$errors->get('description')" />
         </div>
 
         <div class="form-group">
           <label>Status</label>
           <div class="select-wrapper">
-            <select class="custom-select">
+            <select class="custom-select" name="status">
               <option>Pending</option>
               <option>Published</option>
             </select>
           </div>
+          <x-input-error class="mt-2" :messages="$errors->get('status')" />
         </div>
 
         <button type="submit" class="btn-submit">Save Project</button>
@@ -93,14 +100,12 @@
       })
       document.querySelector('#gallery_image').addEventListener('change', (e) => {
         const files = Array.from(e.target.files) 
-        console.log(files);
         const label = $('.hero-placeholder')[0]
         const preview_container = $('.preview-container')[0]
         preview_container.innerHTML = ''
         let preview_html = '';
         if (files.length > 0) {
           files.forEach(file => {
-            console.log(file)
             const imageUrl = URL.createObjectURL(file)
             preview_html += `
                 <div class="gallery-placeholder">
@@ -114,6 +119,16 @@
 
         }
       })
+      async function handleFormSubmit (e) {
+        e.preventDefault();
+        try {
+          const content = await window.editor.save();
+          document.getElementById('description').value = JSON.stringify(content);
+          e.target.submit()
+        } catch (err) {
+          console.error('Auto-save failed:', err);
+        }
+      }
     </script>
   @endsection
 </x-app-layout>
