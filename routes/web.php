@@ -9,13 +9,14 @@ use App\Http\Controllers\ImageUploadController;
 Route::get('/', [SiteController::class, 'home'])->name('home');
 Route::get('/portfolios', [SiteController::class, 'portfolios'])->name('portfolios');
 Route::get('/portfolios/{id}', [SiteController::class, 'portfolios_details'])->name('portfolios.details');
-Route::get('/blogs/{id}', [SiteController::class, 'blogs_details'])->name('blogs.details');
+
 Route::get('/blogs', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/test', [SiteController::class, 'test'])->name('test');
 
 Route::post('/upload-image', [ImageUploadController::class, 'uploadFile']);
 Route::post('/fetch-image', [ImageUploadController::class, 'uploadByUrl']);
 Route::post('/save-project-darft', [BackendController::class, 'save_project_darft'])->name('save-project-darft');
+Route::post('/save-blog-darft', [BackendController::class, 'save_blog_darft'])->name('save-blog-darft');
 
 Route::middleware(['auth', 'verified'])->group(function (){
     Route::get('/dashboard', [BackendController::class, 'dashboard'])->name('dashboard');
@@ -32,12 +33,20 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::get('/blogs', [BackendController::class, 'blogs'])->name('index');
         Route::get('/blogs/create', [BackendController::class, 'blogs_create'])->name('create');
         Route::post('/blogs/store', [BackendController::class, 'blogs_store'])->name('store');
-        Route::get('/blogs/edit', [BackendController::class, 'blogs_edit'])->name('edit');
-        Route::put('/blogs/update', [BackendController::class, 'blogs_update'])->name('update');
-        Route::put('/blogs/delete', [BackendController::class, 'blogs_delete'])->name('delete');
+        Route::get('/blogs/{blog}/edit', [BackendController::class, 'blogs_edit'])->name('edit');
+        Route::put('/blogs/{blog}/update', [BackendController::class, 'blogs_store'])->name('update');
+        Route::delete('/blogs/{blog}/delete', [BackendController::class, 'blogs_delete'])->name('delete');
+    });
+    Route::name('frontend.')->group(function (){
+        Route::get('/frontend', [BackendController::class, 'frontend'])->name('index');
+        Route::get('/frontend/create', [BackendController::class, 'frontend'])->name('create');
+        Route::post('/frontend/store', [BackendController::class, 'frontend'])->name('store');
+        Route::get('/frontend/{blog}/edit', [BackendController::class, 'frontend'])->name('edit');
+        Route::put('/frontend/{blog}/update', [BackendController::class, 'frontend'])->name('update');
+        Route::delete('/frontend/{blog}/delete', [BackendController::class, 'frontend'])->name('delete');
     });
 });
-
+Route::get('/blogs/{id}', [SiteController::class, 'blogs_details'])->name('blogs.details');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

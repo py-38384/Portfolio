@@ -48,7 +48,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-4 text-gray-900 dark:text-gray-100"
                     style="display: flex; justify-content: end; gap: 10px;">
-                    <a href="{{ route('projects.create') }}" class="btn">Add Projects</a>
+                    <a href="{{ route('projects.create') }}" class="btn">Add Project</a>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="pt-6 px-6 text-gray-900 dark:text-gray-100" id="product-count">
-                        Total Projects = 5
+                        Total Projects = {{ $projects->count() }}
                     </div>
                     <div class="table-card">
                         <table class="project-table">
@@ -71,36 +71,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($projects as $project)
-                                    <tr>
-                                        <td>#{{ $project->id }}</td>
-                                        <td><img src="{{ asset('uploads/images/projects/' . $project->hero_image) }}"
-                                                alt="Project Image" class="project-img"></td>
-                                        <td>
-                                            <div class="project-title">{{ $project->project_title }}</div>
-                                            <div class="project-desc">{{ $project->short_description }}</div>
-                                        </td>
-                                        @if($project->status == 'published')
-                                            <td><span class="status active">Active</span></td>
-                                        @else
-                                            <td><span class="status inactive">Deactive</span></td>
-                                        @endif
-                                        <td>
-                                            <div class="actions">
-                                                <a href="{{ route('projects.edit', $project->id) }}"
-                                                    class="btn edit">Edit</a>
-                                                <form action="{{ route('projects.delete', $project->id) }}" method="post"
-                                                    id="deleteRequestForm">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn delete">Delete</button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @forelse ($projects as $project)
+                                <tr>
+                                    <td>#{{ $project->id }}</td>
+                                    <td><img src="{{ asset('uploads/images/projects/' . $project->hero_image) }}"
+                                            alt="Project Image" class="project-img"></td>
+                                    <td>
+                                        <div class="project-title">{{ $project->project_title }}</div>
+                                        <div class="project-desc">{{ $project->short_description }}</div>
+                                    </td>
+                                    @if($project->status == 'published')
+                                        <td><span class="status active">Active</span></td>
+                                    @else
+                                        <td><span class="status inactive">Deactive</span></td>
+                                    @endif
+                                    <td>
+                                        <div class="actions">
+                                            <a href="{{ route('projects.edit', $project->id) }}"
+                                                class="btn edit">Edit</a>
+                                            <form action="{{ route('projects.delete', $project->id) }}" method="post"
+                                                id="deleteRequestForm">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn delete">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="5" style="text-align: center">No Record Found!</td>
+                                </tr>
+                                @endforelse 
                             </tbody>
                         </table>
+                        <div>
+                            {{ $projects->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

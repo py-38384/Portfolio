@@ -459,3 +459,20 @@ textarea {
     border-left: 2px solid white;
     border-bottom: 2px solid white;
 }
+@media screen and (max-width: 1200px) {
+    .back-button-container{
+        width: 140px;
+    }
+    .hero-placeholder {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 560px) {
+    .gallery-placeholder {
+        width: 156px;
+        min-height: 200px;
+    }
+    .gallery-placeholder .images-placeholder {
+        font-size: 30px;
+    }
+}

@@ -21,12 +21,15 @@
                     <x-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.index')">
                         {{ __('Blogs') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('frontend.index')" :active="request()->routeIs('frontend.index')">
+                        {{ __('Frontend') }}
+                    </x-nav-link>
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <a href="/" target="_blank" class="text-gray-700 ">Visit Site</a>
+                <a href="/" target="_blank" class="text-gray-700" style="font-size: 25px;"><i class="fa-solid fa-earth-americas"></i></a>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">

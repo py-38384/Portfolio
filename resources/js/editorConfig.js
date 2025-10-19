@@ -175,21 +175,4 @@ if(editorjs){
         },
         data: window.editor_content,
     });
-    const csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute('content');
-    setInterval(async () => {
-        try {
-            const content = await window.editor.save();
-            fetch(projectAutosaveDarftRoute ?? '/save-project-darft', {
-            method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': csrf_token,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ data: content })
-            })
-
-        } catch (err) {
-            // 
-        }
-    }, 5000);
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -108,22 +109,86 @@ class BackendController extends Controller
         return redirect()->route('projects.index');
     }
 
+    public function save_blog_darft(Request $request){
+        $content = $request->data;
+        Cache::put('blogCache', $content);
+        return ['status' => "success", 'message' => 'Blog Data Cached!'];
+    }
     public function blogs(){
-        return "blogs";
+        $title = 'All Blogs';
+        $blogs = Blog::paginate(10);
+        return view('admin.blogs.index', compact('blogs','title'));
     }
     public function blogs_create(){
-        return "blogs_create";
+        $cached_blog = Cache::get('blogCache');
+        $title = 'Create New Blog';
+        return view('admin.blogs.form', compact('cached_blog','title'));
     }
-    public function blogs_store(){
-        return "blogs_store";
+    public function blogs_store(Request $request, Blog $blog = null){
+        if($blog){
+            $request->validate([
+                'blog_title' => 'required',
+                'short_description' => 'required',
+                'description' => 'required',
+                'status' => 'required|string',
+            ]);
+        } else {
+            $request->validate([
+                'blog_title' => 'required',
+                'short_description' => 'required',
+                'description' => 'required',
+                'status' => 'required|string',
+                'hero_image' => 'required',
+            ]);
+        }
+        $hero_image = '';
+        if($blog){
+            $hero_image = $blog->hero_image;
+        }
+        if($request->hasFile('hero_image')){
+            $this->batchDelete($hero_image, public_path('uploads/images/blogs/'));
+            $hero_image = $this->imageUploadKeepOriginalName(file: $request->hero_image, full_path: public_path("uploads/images/blogs"), only_name: true);
+        }
+        $data = [
+                'blog_title' => $request->blog_title,
+                'short_description' => $request->short_description,
+                'description' => $request->description,
+                'status' => $request->status,
+                'hero_image' => $hero_image,
+        ];
+        $is_created = true;
+        if($blog){
+            $blog->update($data);
+            $is_created = false;
+        } else {
+            Blog::create($data);
+        }
+        Cache::forget('blogCache');
+        if($is_created){
+            Alert::toast('Blog Created','success');
+        } else {
+            Alert::toast('Blog Update','success');
+        }
+        return redirect()->route('blogs.index');
     }
-    public function blogs_edit(){
-        return "blogs_edit";
+    public function blogs_edit(Blog $blog){
+        $title = 'Update Blog - '.$blog->project_title;
+        $blog->gallery_images = json_decode($blog->gallery_image);
+        return view('admin.blogs.form', compact('blog', 'title'));
     }
     public function blogs_update(){
         return "blogs_update";
     }
-    public function blogs_delete(){
-        return "blogs_delete";
+    public function blogs_delete(Blog $blog){
+        $hero_image = $blog->hero_image;
+        $this->batchDelete($hero_image, public_path('uploads/images/blogs/'));
+
+        $blog->delete();
+        Alert::toast('Blog Deleted','success');
+        return redirect()->route('blogs.index');
+    }
+
+    public function frontend(){
+        return "frontend";
     }
 }
