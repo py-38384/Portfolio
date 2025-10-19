@@ -1,4 +1,7 @@
 @section('style')
+    @section('title')
+        {{ $title }}
+    @endsection
     <style>
         :root {
             --table-color: #384b59;
@@ -68,59 +71,68 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>#101</td>
-                                    <td><img src="/assets/images/deshivendor.png" alt="Project Image"
-                                            class="project-img"></td>
-                                    <td>
-                                        <div class="project-title">E-Commerce Website</div>
-                                        <div class="project-desc">A modern Laravel & React based shop platform.</div>
-                                    </td>
-                                    <td><span class="status active">Active</span></td>
-                                    <td>
-                                        <div class="actions">
-                                            <button class="btn edit">Edit</button>
-                                            <button class="btn delete">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#102</td>
-                                    <td><img src="/assets/images/Smart-Learning.png" alt="Project Image"
-                                            class="project-img"></td>
-                                    <td>
-                                        <div class="project-title">Chat Application</div>
-                                        <div class="project-desc">Real-time Laravel Reverb chat system.</div>
-                                    </td>
-                                    <td><span class="status pending">Pending</span></td>
-                                    <td>
-                                        <div class="actions">
-                                            <button class="btn edit">Edit</button>
-                                            <button class="btn delete">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#103</td>
-                                    <td><img src="/assets/images/ultimateorganiclife.png" alt="Project Image"
-                                            class="project-img"></td>
-                                    <td>
-                                        <div class="project-title">Portfolio Website</div>
-                                        <div class="project-desc">Personal portfolio built with Tailwind & Laravel.
-                                        </div>
-                                    </td>
-                                    <td><span class="status inactive">Inactive</span></td>
-                                    <td>
-                                        <div class="actions">
-                                            <button class="btn edit">Edit</button>
-                                            <button class="btn delete">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @foreach ($projects as $project)
+                                    <tr>
+                                        <td>#{{ $project->id }}</td>
+                                        <td><img src="{{ asset('uploads/images/projects/' . $project->hero_image) }}"
+                                                alt="Project Image" class="project-img"></td>
+                                        <td>
+                                            <div class="project-title">{{ $project->project_title }}</div>
+                                            <div class="project-desc">{{ $project->short_description }}</div>
+                                        </td>
+                                        @if($project->status == 'published')
+                                            <td><span class="status active">Active</span></td>
+                                        @else
+                                            <td><span class="status inactive">Deactive</span></td>
+                                        @endif
+                                        <td>
+                                            <div class="actions">
+                                                <a href="{{ route('projects.edit', $project->id) }}"
+                                                    class="btn edit">Edit</a>
+                                                <form action="{{ route('projects.delete', $project->id) }}" method="post"
+                                                    id="deleteRequestForm">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn delete">Delete</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+        @section('scripts')
+            <script>
+                document.querySelector('#deleteRequestForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    Swal.fire({
+                        title: "Are you sure you want to delete this project?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#F05555",
+                        cancelButtonColor: "#183153",
+                        confirmButtonText: "Yes, delete it!",
+                        // 👇 Popup animation (uses Animate.css)
+                        showClass: {
+                            popup: 'animate__animated animate__zoomIn animate__faster'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__zoomOut animate__faster'
+                        },
+                        toast: false, // ensure it's a modal, not a toast
+                        position: 'center'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            e.target.submit();
+                        }
+                    });
+                });
+            </script>
+        @endsection
 </x-app-layout>

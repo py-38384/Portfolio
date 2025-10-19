@@ -15,6 +15,7 @@ Route::get('/test', [SiteController::class, 'test'])->name('test');
 
 Route::post('/upload-image', [ImageUploadController::class, 'uploadFile']);
 Route::post('/fetch-image', [ImageUploadController::class, 'uploadByUrl']);
+Route::post('/save-project-darft', [BackendController::class, 'save_project_darft'])->name('save-project-darft');
 
 Route::middleware(['auth', 'verified'])->group(function (){
     Route::get('/dashboard', [BackendController::class, 'dashboard'])->name('dashboard');
@@ -23,9 +24,9 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::get('/projects', [BackendController::class, 'projects'])->name('index');
         Route::get('/projects/create', [BackendController::class, 'projects_create'])->name('create');
         Route::post('/projects/store', [BackendController::class, 'projects_store'])->name('store');
-        Route::get('/projects/edit', [BackendController::class, 'projects_edit'])->name('edit');
-        Route::put('/projects/update', [BackendController::class, 'projects_update'])->name('update');
-        Route::put('/projects/delete', [BackendController::class, 'projects_delete'])->name('delete');
+        Route::get('/projects/{project}/edit', [BackendController::class, 'projects_edit'])->name('edit');
+        Route::put('/projects/{project}/update', [BackendController::class, 'projects_store'])->name('update');
+        Route::delete('/projects/{project}/delete', [BackendController::class, 'projects_delete'])->name('delete');
     });
     Route::name('blogs.')->group(function (){
         Route::get('/blogs', [BackendController::class, 'blogs'])->name('index');

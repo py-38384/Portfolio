@@ -126,6 +126,11 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        'file_delete' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/file_delete.log'),
+            'level' => 'info',
+        ]
 
     ],
 

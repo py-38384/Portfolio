@@ -39,6 +39,7 @@
         "editorjs-collapsible-block": "^1.0.1",
         "editorjs-style": "^3.0.3",
         "highlight.js": "^11.11.1",
-        "lowlight": "^3.3.0"
+        "lowlight": "^3.3.0",
+        "sweetalert2": "^11.26.3"
     }
 }
