@@ -28,7 +28,7 @@
             </div>
             <div class="command-container">
                 <span class="command"> &gt; pial.contact</span>
-                <span class="command-response">["<a href="mailto:piyal13133@gmail.com">piyal13133@gmail.com</a>", "<a href="https://github.com/py-38384" target="_blank">github</a>", "<a href="https://www.linkedin.com/in/piyal-hossain-b3720b21b" target="_blank">LinkedIn</a>", "<a href="https://www.facebook.com/piyal.hossain.898691" target="_blank">Facebook</a>", "<a href="https://wa.me/8801317143305" target="_blank">Whatsapp</a>" ]</span>
+                <span class="command-response">["<a href="mailto:piyal13133@gmail.com">piyal13133@gmail.com</a>", "<a href="https://github.com/py-38384" target="_blank">github</a>", "<a href="https://www.linkedin.com/in/piyal-hossain-b3720b21b" target="_blank">LinkedIn</a>", "<a href="https://www.facebook.com/piyal.hossain.898691" target="_blank">Facebook</a>", "<a href="https://wa.me/8801317143305" target="_blank">Whatsapp</a>"]</span>
             </div>
             <div class="command-container">
                 <span class="command"> &gt; pial.resume</span>

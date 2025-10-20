@@ -39,11 +39,15 @@ Route::middleware(['auth', 'verified'])->group(function (){
     });
     Route::name('frontend.')->group(function (){
         Route::get('/frontend', [BackendController::class, 'frontend'])->name('index');
-        Route::get('/frontend/create', [BackendController::class, 'frontend'])->name('create');
-        Route::post('/frontend/store', [BackendController::class, 'frontend'])->name('store');
-        Route::get('/frontend/{blog}/edit', [BackendController::class, 'frontend'])->name('edit');
-        Route::put('/frontend/{blog}/update', [BackendController::class, 'frontend'])->name('update');
-        Route::delete('/frontend/{blog}/delete', [BackendController::class, 'frontend'])->name('delete');
+        Route::put('/frontend/store', [BackendController::class, 'frontend_store'])->name('store');
+    });
+    Route::name('console.')->group(function (){
+        Route::get('/console', [BackendController::class, 'console'])->name('index');
+        Route::get('/console/create', [BackendController::class, 'console_create'])->name('create');
+        Route::post('/console/store', [BackendController::class, 'console_store'])->name('store');
+        Route::get('/console/{console}/edit', [BackendController::class, 'console_edit'])->name('edit');
+        Route::put('/console/{console}/update', [BackendController::class, 'console_store'])->name('update');
+        Route::delete('/console/{console}/delete', [BackendController::class, 'console_delete'])->name('delete');
     });
 });
 Route::get('/blogs/{id}', [SiteController::class, 'blogs_details'])->name('blogs.details');

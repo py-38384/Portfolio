@@ -459,6 +459,11 @@ textarea {
     border-left: 2px solid white;
     border-bottom: 2px solid white;
 }
+#array_value_container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 @media screen and (max-width: 1200px) {
     .back-button-container{
         width: 140px;

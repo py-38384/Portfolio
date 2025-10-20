@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('frontend.index')" :active="request()->routeIs('frontend.index')">
                         {{ __('Frontend') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('console.index')" :active="request()->routeIs('console.index')">
+                        {{ __('Console') }}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Console;
+use App\Models\Frontend;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -187,8 +189,131 @@ class BackendController extends Controller
         Alert::toast('Blog Deleted','success');
         return redirect()->route('blogs.index');
     }
-
+    
     public function frontend(){
-        return "frontend";
+        $title = 'Frontend Data';
+
+        $frontend = Frontend::getItem();
+        $frontend->skills_icons = json_decode($frontend->about_skills_image);
+        return view('admin.frontend.form', compact('frontend','title'));
+    }
+    public function frontend_store(Request $request){
+        $frontend = Frontend::getItem();
+        $frontend->name = $request->name;
+        $frontend->hero_brief = $request->hero_brief;
+
+        $hero_image = '';
+        if($frontend->hero_image){
+            $hero_image = $frontend->hero_image;
+        }
+        if($request->hasFile('hero_image')){
+            $this->batchDelete($hero_image, public_path('uploads/images/frontend/hero_image'));
+            $hero_image = $this->imageUploadKeepOriginalName(file: $request->hero_image, full_path: public_path("uploads/images/frontend/hero_image"), only_name: true);
+        }
+        $frontend->hero_image = $hero_image;
+
+        $frontend->portfolio_title = $request->portfolio_title;
+        $frontend->portfolio_desc = $request->portfolio_desc;
+
+        $frontend->about_title = $request->about_title;
+        $frontend->about_desc = $request->about_desc;
+
+        $about_image = '';
+        if($frontend->about_image){
+            $about_image = $frontend->about_image;
+        }
+        if($request->hasFile('about_image')){
+            $this->batchDelete($about_image, public_path('uploads/images/frontend/about_image'));
+            $about_image = $this->imageUploadKeepOriginalName(file: $request->about_image, full_path: public_path("uploads/images/frontend/about_image"), only_name: true);
+        }
+        $frontend->about_image = $about_image;
+
+        $frontend->about_story_title = $request->about_story_title;
+        $frontend->about_story = $request->about_story;
+
+        $about_skills_images = [];
+        if($frontend->about_skills_image){
+            $about_skills_images = json_decode($frontend->about_skills_image, true);
+        }
+        if($request->about_skills_images && is_array($request->about_skills_images) && count($request->about_skills_images) > 0){
+            $this->batchDelete($about_skills_images, public_path('uploads/images/frontend/skills_icons/'));
+            $about_skills_images = [];
+            foreach($request->about_skills_images as $gallery_image){
+                $about_skills_images[] = $this->imageUploadKeepOriginalName(file: $gallery_image, full_path: public_path("uploads/images/frontend/skills_icons/"), only_name: true,);
+            }
+        }
+        $frontend->about_skills_image = json_encode($about_skills_images);
+        $frontend->about_button_text = $request->about_button_text;
+        $frontend->blog_title = $request->blog_title;
+        $frontend->blog_desc = $request->blog_desc;
+        $frontend->contact_title = $request->contact_title;
+        $frontend->contact_desc = $request->contact_desc;
+        
+        $contact_image = '';
+        if($frontend->contact_image){
+            $contact_image = $frontend->contact_image;
+        }
+        if($request->hasFile('contact_image')){
+            $this->batchDelete($contact_image, public_path('uploads/images/frontend/contact_image'));
+            $contact_image = $this->imageUploadKeepOriginalName(file: $request->contact_image, full_path: public_path("uploads/images/frontend/contact_image"), only_name: true);
+        }
+        $frontend->contact_image = $contact_image; 
+        $frontend->copyright_text = $request->copyright_text;
+
+        $frontend->save();
+        Alert::toast('Frontend Data Update','success');
+        return redirect()->route('frontend.index');
+    }
+    public function console(){
+        $title = 'Console Data';
+
+        $consoles = Console::all();
+        foreach ($consoles as $key => $console) {
+            $console->content = json_decode($console->content);
+        }
+        return view('admin.console.index', compact('consoles','title'));
+    }
+    public function console_create(){
+        $title = 'Property Create';
+        return view('admin.console.form', compact('title'));
+    }
+    public function console_store(Request $request, Console $console = null){
+        $request->validate([
+            'property' => 'required',
+            'type' => 'required',
+            'status' => 'required',
+        ]);
+        $created = true;
+        if($console){
+            $created = false;
+        } else {
+            $console = new Console();
+        }
+        $console->property = $request->property;
+        $console->type = $request->type;
+        $console->status = $request->status;
+        if($console->type == 'string'){
+            $value = ['string' => $request->string, 'link' => $request->link];
+            $console->content = json_encode($value);
+        }
+        if($console->type == 'array'){
+            $console->content = json_encode($request->value);
+        }
+        $console->save();
+        if($created){
+            Alert::toast('Console Data Updated','success');
+        } else {
+            Alert::toast('Console Data Created','success');
+        }
+        return redirect()->route('console.index');
+    }
+    public function console_edit(Console $console){
+        $title = 'Property Edit';
+        return view('admin.console.form', compact('console','title'));
+    }
+    public function console_delete(Console $console = null){
+        $console->delete();
+        Alert::toast('Console Data Deleted','success');
+        return redirect()->route('console.index');
     }
 }

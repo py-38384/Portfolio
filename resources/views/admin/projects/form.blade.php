@@ -34,7 +34,7 @@
         <div class="form-group">
           <x-input-label for="project_title" :value="__('Project Title')" />
           <x-text-input id="project_title" name="project_title" type="text" class="mt-1 block w-full"
-            value="{{ old('project_title', isset($project)? $project->project_title: '') }}" required autofocus autocomplete="project_title" />
+            value="{{ old('project_title', isset($project)? $project->project_title: '') }}" required  autocomplete="project_title" />
           <x-input-error class="mt-2" :messages="$errors->get('project_title')" />
         </div>
 
