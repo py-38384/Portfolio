@@ -22,7 +22,7 @@ class SiteController extends Controller
         return view('blogs');
     }
     public function blogs_details($id){
-        return view('blog.details');
+        return view('blogs.details');
     }
     public function test(){
         return view('test');

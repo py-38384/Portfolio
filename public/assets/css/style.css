@@ -3,39 +3,33 @@
 :root {
     --primary-text-color: #2f435c;
 
-    /* --primary-body-color: #cfe3e7; */
+    --primary-body-color: #003BFC17;
     /* --primary-body-color: #18315334; */
-    --primary-body-color: #00042B23;
+    /* --primary-body-color: #001AFF0C; */
 
-    /* --active-text-color: #4184ff; */
+    --active-text-color: #4184ff;
+    /* --active-text-color: #183153; */
     /* --active-text-color: #00AA4D; */
-    --active-text-color: #183153;
 
-    /* --box-shadow-color: #aec0e2; */
+    --outline-default-color: #4184FF21;
+    /* --outline-default-color: #18315321; */
+    /* --outline-default-color: #00AA4D1C; */
+    
+
     --box-shadow-color: #1831534D;
+    /* --box-shadow-color: #aec0e2; */
+    /* --box-shadow-color: #14382448; */
 
     --console-response-text-color:rgb(230 230 0);
 
     --console-response-anchor-text-color:rgba(0 247 255 / 0.63);
-    
-    --outline-default-color: #18315321;
 
-    /* --primary-btn-hover-border-color: #6b9fff; */
-    --primary-btn-hover-border-color: #183153;
-
-    /* --primary-btn-hover-border-bg-color: rgb(239 248 255); */
-    --primary-btn-hover-border-bg-color: rgb(240 239 255);
-
-    --link-color: rgb(92 81 255);
-
-    --slider-hover-bg-color: #2f435c;
     --slider-arrow-color: gray;
     --slider-arrow-hover-color: whitesmoke;
 
     --primary-element-bg-color: white;
 
     --code-background-color: #353535;
-    /* --code-background-color: #1f1f1f; */
 
     --code-font-color: lightgray;
 
@@ -326,9 +320,9 @@ nav ul li:hover {
     border: 1px solid transparent;
 }
 .btn-primary:hover {
-    background-color: var(--primary-btn-hover-border-bg-color);
+    background-color: white;
     color: var(--active-text-color);
-    border: 1px solid var(--primary-btn-hover-border-color);
+    border: 1px solid var(--active-text-color);
 }
 .btn-secondary {
     background: rgb(230 230 230);
@@ -337,6 +331,7 @@ nav ul li:hover {
 .btn-secondary:hover {
     background-color: transparent;
     color: var(--active-text-color);
+    border-color: var(--active-text-color);
 }
 .details-container .button-container {
     display: flex;
@@ -589,9 +584,6 @@ footer{
     justify-content: center;
     gap: 5px;
 }
-.back-to-home a:hover{
-    color: var(--link-color);
-}
 .blog-container-all{
     grid-template-columns: 1fr;
     gap: 20px;
@@ -684,7 +676,7 @@ footer{
     left: 4px;
 }
 .controls .arrow:hover{
-    background-color: var(--slider-hover-bg-color);
+    background-color: var(--active-text-color);
     border-radius: 10px;
 }
 .controls .arrow:hover span{

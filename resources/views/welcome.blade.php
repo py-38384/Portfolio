@@ -29,7 +29,7 @@
                         <span class="command"> &gt; {{ $command->property }}</span>
                         <span class="command-response">
                             @if($command->content['link']) 
-                                <a href="{{ $command->content['link'] }}" target="_blank">"{{ $command->content['string'] }}"</a> 
+                                "<a href="{{ $command->content['link'] }}" target="_blank">{{ $command->content['string'] }}</a>" 
                             @else 
                                 "{{ $command->content['string'] }}"
                             @endif
