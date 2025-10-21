@@ -54,6 +54,7 @@ Route::get('/blogs/{id}', [SiteController::class, 'blogs_details'])->name('blogs
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/icons', [ProfileController::class, 'updateIcons'])->name('profile.icons');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

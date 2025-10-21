@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('genarel_settings', function (Blueprint $table) {
+        Schema::create('general_settings', function (Blueprint $table) {
             $table->id();
-            $table->string('logo');
-            $table->string('favicon');
+            $table->string('icon')->nullable();
+            $table->string('favicon')->nullable();
             $table->timestamps();
         });
     }

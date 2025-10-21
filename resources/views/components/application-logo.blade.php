@@ -1,1 +1,1 @@
-<img style="width: 50px;" src="{{ asset('assets/images/portfolio.png') }}" alt="logo">
+<img style="width: 50px;" src="{{ $GeneralSetting->icon? asset("uploads/images/general/icons/$GeneralSetting->icon"): "uploads/images/general/icons/default_icon.png" }}" alt="logo">

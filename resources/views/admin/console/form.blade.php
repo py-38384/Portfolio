@@ -20,10 +20,11 @@
   <div class="form-container">
     <div class="form-card">
 
-      <form action="{{ isset($console)? route('console.update', $console->id) :route('console.store') }}" method="post" enctype="multipart/form-data">
+      <form action="{{ isset($console) ? route('console.update', $console->id) : route('console.store') }}" method="post"
+        enctype="multipart/form-data">
         @csrf
         @if(isset($console))
-        @method("PUT")
+          @method("PUT")
         @endif
         <div class="form-group">
           <div class="back-button-container">
@@ -48,36 +49,18 @@
         </div>
         <div class="form-group" id="value_container">
           @if(isset($console))
-            @php
-              $console->content = json_decode($console->content);
-            @endphp
             @if($console->type == 'string')
               <div>
                 <!-- String Input -->
                 <x-input-label for="string" :value="__('String Value')" />
-                <x-text-input
-                    id="string"
-                    name="string"
-                    type="text"
-                    placeholder="String Value"
-                    class="mt-1 block w-full"
-                    :value="old('string', $console->content->string ?? '')"
-                    required
-                    autocomplete="string"
-                />
+                <x-text-input id="string" name="string" type="text" placeholder="String Value" class="mt-1 block w-full"
+                  :value="old('string', $console->content['string'] ?? '')" required autocomplete="string" />
                 <x-input-error class="mt-2" :messages="$errors->get('string')" />
 
                 <!-- Link Input -->
                 <x-input-label for="link" :value="__('Link Value')" />
-                <x-text-input
-                    id="link"
-                    name="link"
-                    type="text"
-                    placeholder="Link Value"
-                    class="mt-1 block w-full"
-                    :value="old('link', $console->content->link ?? '')"
-                    autocomplete="link"
-                />
+                <x-text-input id="link" name="link" type="text" placeholder="Link Value" class="mt-1 block w-full"
+                  :value="old('link', $console->content['link'] ?? '')" autocomplete="link" />
                 <x-input-error class="mt-2" :messages="$errors->get('link')" />
 
               </div>
@@ -85,20 +68,21 @@
               <div class="form-group" id="value_container">
                 <div id="array_value_container">
                   @foreach ($console->content as $index => $content)
-                  @php
-                  $array_index = $index;
-                  @endphp
+                    @php
+                      $array_index = $index;
+                    @endphp
                     <div>
                       <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="string_value">
                         Array value #{{ $index }}
                       </label>
                       <input
                         class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full"
-                        id="string_value" name="value[0][string]" value="{{ $content->string }}" type="text" placeholder="Value" required="required"
-                        autocomplete="string_value">
+                        id="string_value" name="value[{{ $index }}][string]" value="{{ $content['string'] }}" type="text"
+                        placeholder="Value" required="required" autocomplete="string_value">
                       <input
                         class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full"
-                        id="string_value" name="value[0][link]" value="{{ $content->link }}" type="text" placeholder="Link" autocomplete="string_value">
+                        id="string_value" name="value[{{ $index }}][link]" value="{{ $content['link'] }}" type="text" placeholder="Link"
+                        autocomplete="string_value">
                     </div>
                   @endforeach
                 </div>
@@ -139,33 +123,33 @@
     <script>
       const typeSelect = document.querySelector('#type_select');
       const valueContainer = document.querySelector('#value_container');
-      let index = {{ $array_index+1 }};
+      let index = {{ $array_index + 1 }};
       typeSelect.addEventListener('change', (e) => {
         const value = e.target.value;
         if (value === 'string') {
           index = 1;
           const html = `<div>
-                              <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="string_value">
-                                  Value
-                              </label>
-                              <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" id="string_value" name="string" type="text" placeholder="Value" required="required" autocomplete="string_value">
-                              <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" id="string_value" name="link" type="text" placeholder="Link" autocomplete="string_value">
-                            </div>`;
+                                <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="string_value">
+                                    Value
+                                </label>
+                                <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" id="string_value" name="string" type="text" placeholder="Value" required="required" autocomplete="string_value">
+                                <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" id="string_value" name="link" type="text" placeholder="Link" autocomplete="string_value">
+                              </div>`;
           valueContainer.innerHTML = html;
         }
         if (value === 'array') {
           const html = `<div id="array_value_container">
-                              <div>
-                                <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="string_value">
-                                    Array value #0
-                                </label>
-                                <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" id="string_value" name="value[0][string]" type="text" placeholder="Value" required="required" autocomplete="string_value">
-                                <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" id="string_value" name="value[0][link]" type="text" placeholder="Link" autocomplete="string_value">
+                                <div>
+                                  <label class="block font-medium text-sm text-gray-700 dark:text-gray-300" for="string_value">
+                                      Array value #0
+                                  </label>
+                                  <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" id="string_value" name="value[0][string]" type="text" placeholder="Value" required="required" autocomplete="string_value">
+                                  <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" id="string_value" name="value[0][link]" type="text" placeholder="Link" autocomplete="string_value">
+                                </div>
                               </div>
-                            </div>
-                            <div>
-                              <button class="btn mt-2 text-xl" onclick="addArrayValue(event)">+</button>
-                            </div>`;
+                              <div>
+                                <button class="btn mt-2 text-xl" onclick="addArrayValue(event)">+</button>
+                              </div>`;
           valueContainer.innerHTML = html;
         }
         if (value === 'object') {

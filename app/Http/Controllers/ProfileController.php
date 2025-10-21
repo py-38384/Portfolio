@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Models\GeneralSetting;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -16,8 +18,12 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $title = "Profile Update";
+        $generalSettings = GeneralSetting::getItem();
         return view('profile.edit', [
             'user' => $request->user(),
+            'title' => $title,
+            'generalSettings' => $generalSettings
         ]);
     }
 
@@ -35,6 +41,33 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    public function updateIcons(Request $request){
+        $generalSettings = GeneralSetting::getItem();
+
+        $icon = '';
+        if($generalSettings->icon){
+            $icon = $generalSettings->icon;
+        }
+        if($request->hasFile('icon')){
+            $this->batchDelete($icon, public_path('uploads/images/general/icons/'));
+            $icon = $this->imageUploadKeepOriginalName(file: $request->icon, full_path: public_path("uploads/images/general/icons"), only_name: true);
+        }
+
+        $favicon = '';
+        if($generalSettings->favicon){
+            $favicon = $generalSettings->favicon;
+        }
+        if($request->hasFile('favicon')){
+            $this->batchDelete($favicon, public_path('uploads/images/general/icons/'));
+            $favicon = $this->imageUploadKeepOriginalName(file: $request->favicon, full_path: public_path("uploads/images/general/icons"), only_name: true);
+        }
+        $generalSettings->icon = $icon;
+        $generalSettings->favicon = $favicon;
+        $generalSettings->save();
+        Alert::toast('Icons Update','success');
+        return redirect()->route('profile.edit');
     }
 
     /**

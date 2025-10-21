@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\traits\ModelCommonFumctionality;
 use Illuminate\Database\Eloquent\Model;
 
-class Console extends Model
+class GeneralSetting extends Model
 {
+    use ModelCommonFumctionality;
     protected $guarded = ['id', 'created_at', 'updated_at'];
-    protected $casts = [
-        'content' => 'array', // or 'object'
-    ];
 }

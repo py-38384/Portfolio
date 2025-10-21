@@ -1,1 +1,1 @@
-<footer>Made with <i class="fa-solid fa-heart"></i> by Pial Hossen &copy; {{ date('Y') }} </footer>
+<footer>{!! $fontend->copyright_text !!} &copy; {{ date('Y') }} </footer>

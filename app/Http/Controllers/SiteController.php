@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Console;
+use App\Models\Frontend;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
     public function home(){
-        return view('welcome');
+        $console = Console::all();
+        return view('welcome', compact('console'));
     }
     public function portfolios(){
         return view('projects.portfolio');

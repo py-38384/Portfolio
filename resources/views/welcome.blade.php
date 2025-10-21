@@ -2,10 +2,10 @@
     <section class="hero-sections">
         <div>
             <div class="hero-title"> &gt; <span class="addition-space">&nbsp</span> <span id="element"></span></div>
-            <p class="small-desc">I am a professional full-stack web developer experienced in Laravel, React, Next.js, and WordPress. I specialize in building scalable, user-friendly web applications and custom solutions tailored to business needs.</p>
+            <p class="small-desc">{{ $fontend->hero_brief }}</p>
         </div>
         <div class="computer-image">
-            <img src="/assets/images/organic-flat-gamer-room-illustration.png" alt="Computer">
+            <img src="{{ asset('uploads/images/frontend/hero_image/'.$fontend->hero_image) }}" alt="Computer">
         </div>
     </section>
 
@@ -22,42 +22,50 @@
         </div>
         <div class="main-section">
 
+            @forelse ($console as $command)
+                @if($command->status == 'published')
+                    @if($command->type == "string")
+                    <div class="command-container">
+                        <span class="command"> &gt; {{ $command->property }}</span>
+                        <span class="command-response">
+                            @if($command->content['link']) 
+                                <a href="{{ $command->content['link'] }}" target="_blank">"{{ $command->content['string'] }}"</a> 
+                            @else 
+                                "{{ $command->content['string'] }}"
+                            @endif
+                        </span>
+                    </div>
+                    @else
+                    <div class="command-container">
+                        <span class="command"> &gt; {{ $command->property }}</span>
+                        <span class="command-response">
+                            [
+                                @foreach ($command->content as $index => $item)
+                                    @if($item['link'])
+                                    "<a href="{{ $item['link'] }}" target="_blank">{{ $item['string'] }}</a>"@if($index != (count($command->content)-1)),@endif 
+                                    @else
+                                    "{{ $item['string'] }}"@if($index != (count($command->content)-1)),@endif
+                                    @endif
+                                @endforeach
+                            ]
+                        </span>
+                    </div>
+                    @endif
+                @endif
+            @empty
             <div class="command-container">
-                <span class="command"> &gt; pial.location</span>
-                <span class="command-response">"Natore, Bangladesh"</span>
+                <span class="command"> &gt; name.location</span>
+                <span class="command-response" style="color: red;">"System Error! Data Not Found!"</span>
             </div>
-            <div class="command-container">
-                <span class="command"> &gt; pial.contact</span>
-                <span class="command-response">["<a href="mailto:piyal13133@gmail.com">piyal13133@gmail.com</a>", "<a href="https://github.com/py-38384" target="_blank">github</a>", "<a href="https://www.linkedin.com/in/piyal-hossain-b3720b21b" target="_blank">LinkedIn</a>", "<a href="https://www.facebook.com/piyal.hossain.898691" target="_blank">Facebook</a>", "<a href="https://wa.me/8801317143305" target="_blank">Whatsapp</a>"]</span>
-            </div>
-            <div class="command-container">
-                <span class="command"> &gt; pial.resume</span>
-                <span class="command-response">"resume(pial).pdf"</span>
-            </div>
-            <div class="command-container">
-                <span class="command"> &gt; pial.interests</span>
-                <span class="command-response">["movie", "walking", "gaming", "traveling"]</span>
-            </div>
-            <div class="command-container">
-                <span class="command"> &gt; pial.Skils</span>
-                <span class="command-response">["Laravel", "Wordpress", "React", "Nextjs", "Socket.io"]</span>
-            </div>
-            <div class="command-container">
-                <span class="command"> &gt; pial.languages</span>
-                <span class="command-response">["PHP", "Javascript", "Typescript", "Python"]</span>
-            </div>
-            <div class="command-container">
-                <span class="command"> &gt; <span class="cursor">|</span></span>
-                <span class="command-response"></span>
-            </div>
+            @endforelse
 
         </div>
     </section>
 
     <section class="portfolio-section">
         <div class="section-title-and-desc">
-            <h1 class="section-title">Portfolio</h1>
-            <p class="section-desc">Here are some of the projects I've worked on. Feel free to take a look.</p>
+            <h1 class="section-title">{{ $fontend->portfolio_title }}</h1>
+            <p class="section-desc">{{ $fontend->portfolio_desc }}</p>
         </div>
         <div class="portfolio-container">
             <div class="portfolio">
@@ -131,28 +139,26 @@
 
     <section class="about-section">
         <div class="section-title-and-desc">
-            <h1 class="section-title">About</h1>
-            <p class="section-desc">A little more about me</p>
+            <h1 class="section-title">{{ $fontend->about_title }}</h1>
+            <p class="section-desc">{{ $fontend->about_desc }}</p>
         </div>
         <div class="about-me-container">
             <div class="band"></div>
-            <div class="image-container"><img src={{ asset("/assets/images/about3.png") }} alt=""></div>
+            <div class="image-container"><img src="{{ asset('uploads/images/frontend/about_image/'.$fontend->about_image) }}" alt=""></div>
             <div class="content">
-                <h4>My Story</h4>
+                <h4>{{ $fontend->about_story_title }}</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, veritatis eius sunt et molestias veniam neque vitae amet atque. Ab, placeat? Quisquam itaque quas inventore distinctio quaerat, animi quam error! Eum hic laudantium, debitis repellendus est nihil cupiditate sit molestiae libero et id voluptates corporis consequuntur itaque ipsam optio exercitationem facilis tenetur recusandae voluptatem consequatur fuga accusamus. Quam, consectetur deleniti omnis dignissimos numquam non. Modi perferendis reprehenderit dicta. Labore sit delectus at ab illum culpa sapiente cum facilis reprehenderit eos officia voluptate libero consequuntur nemo explicabo molestiae voluptas reiciendis repellat aliquam aliquid, laudantium, porro ipsum ipsa. Consequuntur architecto modi eum corporis autem. Recusandae provident corrupti officiis labore quas vitae at. Molestiae obcaecati dolores temporibus asperiores non sed fugit ad dicta!</p>
                 <h4>Skills</h4>
                 <div class="skills-icon">
-                    <span class="icon"><img src="/assets/svgs/brand-elementor-svgrepo-com.svg" alt=""></span>
-                    <span class="icon"><img src="/assets/svgs/css3-02-svgrepo-com.svg" alt=""></span>
-                    <span class="icon"><img src="/assets/svgs/html-124-svgrepo-com.svg" alt=""></span>
-                    <span class="icon"><img src="/assets/svgs/js01-svgrepo-com.svg" alt=""></span>
-                    <span class="icon"><img src="/assets/svgs/laravel-svgrepo-com.svg" alt=""></span>
-                    <span class="icon"><img src="/assets/svgs/nextjs-fill-svgrepo-com.svg" alt=""></span>
-                    <span class="icon"><img src="/assets/svgs/php01-svgrepo-com.svg" alt=""></span>
-                    <span class="icon"><img src="/assets/svgs/react-svgrepo-com.svg" alt=""></span>
+                    @php
+                        $fontend->about_skills_image = json_decode($fontend->about_skills_image);
+                    @endphp
+                    @foreach ($fontend->about_skills_image as $skill_image)
+                    <span class="icon"><img src="{{ asset("uploads/images/frontend/skills_icons/".$skill_image) }}" alt=""></span>
+                    @endforeach
                 </div>
                 <div class="CTA-button">
-                    <a href="" class="btn-primary">Let's have a talk</a>
+                    <a href="" class="btn-primary">{{ $fontend->about_button_text }}</a>
                 </div>
                 
             </div>
@@ -161,8 +167,8 @@
 
     <section class="blog-section">
         <div class="section-title-and-desc">
-            <h1 class="section-title">Blogs</h1>
-            <p class="section-desc">Blogs that may be useful for you and of course me</p>
+            <h1 class="section-title">{{ $fontend->blog_title }}</h1>
+            <p class="section-desc">{{ $fontend->blog_desc }}</p>
         </div>
         <div class="blog-container">
             <div class="blog">
@@ -212,12 +218,12 @@
 
     <section class="contact-section">
         <div class="section-title-and-desc">
-            <h1 class="section-title">Contact Me</h1>
-            <p class="section-desc">Send me a private message</p>
+            <h1 class="section-title">{{ $fontend->contact_title }}</h1>
+            <p class="section-desc">{{ $fontend->contact_desc }}</p>
         </div>
         <div class="contact-container">
             <div class="left-side">
-                <div class="represent-image"><img src="/assets/images/contact.png" alt=""></div>
+                <div class="represent-image"><img src="{{ asset("uploads/images/frontend/contact_image/$fontend->contact_image") }}" alt=""></div>
             </div>
             <div class="right-side">
                 <form action="">
@@ -252,7 +258,7 @@
     <script src="/assets/js/typed.js"></script>
     <script>
         var typed = new Typed('#element', {
-        strings: ['Pial Hossen'],
+        strings: ["{{ $fontend->name }}"],
         typeSpeed: 150,
         });
     </script>

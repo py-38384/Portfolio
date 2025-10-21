@@ -267,10 +267,8 @@ class BackendController extends Controller
     public function console(){
         $title = 'Console Data';
 
-        $consoles = Console::all();
-        foreach ($consoles as $key => $console) {
-            $console->content = json_decode($console->content);
-        }
+        $consoles = Console::paginate(10);
+
         return view('admin.console.index', compact('consoles','title'));
     }
     public function console_create(){
@@ -294,10 +292,10 @@ class BackendController extends Controller
         $console->status = $request->status;
         if($console->type == 'string'){
             $value = ['string' => $request->string, 'link' => $request->link];
-            $console->content = json_encode($value);
+            $console->content = $value;
         }
         if($console->type == 'array'){
-            $console->content = json_encode($request->value);
+            $console->content = $request->value;
         }
         $console->save();
         if($created){

@@ -2,16 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\traits\ModelCommonFumctionality;
 use Illuminate\Database\Eloquent\Model;
 
 class Frontend extends Model
 {
+    use ModelCommonFumctionality;
     protected $guarded = [];
-    public static function getItem(){
-        $item = self::find(1);
-        if($item){
-            return $item;
-        }
-        return self::create(['id' => 1]);
-    }
 }

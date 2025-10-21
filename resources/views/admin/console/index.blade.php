@@ -84,14 +84,14 @@
                                     @endif
                                     <td style="max-width: 300px; overflow: hidden;">
                                         @if($console->type == 'string')
-                                        {{ isset($console->content->string)? 'String = '.$console->content->string: '' }} <br>
-                                        <span style="max-width: 300px;">{{ isset($console->content->link)? 'Link = '.$console->content->link: '' }}</span>
+                                        {{ isset($console->content['string'])? 'String = '.$console->content['string']: '' }} <br>
+                                        <span style="max-width: 300px;">{{ isset($console->content['link'])? 'Link = '.$console->content['link']: '' }}</span>
                                         @else
                                         [
                                         @foreach ($console->content as $item)
                                             {
-                                                String: {{ $item->string }}, 
-                                                link: {{ $item->link }} 
+                                                String: {{ $item['string'] }}, 
+                                                link: {{ $item['link'] }} 
                                             }
                                         @endforeach
                                         ] 
@@ -117,6 +117,9 @@
                                 @endforelse 
                             </tbody>
                         </table>
+                        <div>
+                            {{ $consoles->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
