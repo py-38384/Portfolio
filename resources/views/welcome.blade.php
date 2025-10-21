@@ -226,22 +226,23 @@
                 <div class="represent-image"><img src="{{ asset("uploads/images/frontend/contact_image/$fontend->contact_image") }}" alt=""></div>
             </div>
             <div class="right-side">
-                <form action="">
+                <form action="{{ route('save.contact') }}" method="post">
+                    @csrf
                     <div class="form-field">
                         <label for="subject">Subject</label>
-                        <input type="text" id="subject" placeholder="Subject" name="subject">
+                        <input type="text" id="subject" value="{{ old('subject') }}" placeholder="Subject" name="subject">
                     </div>
                     <div class="form-field">
                         <label for="full_name">Full Name</label>
-                        <input type="text" id="full_name" placeholder="Full Name" name="full_name">
+                        <input type="text" id="full_name" value="{{ old('full_name') }}" placeholder="Full Name" name="full_name">
                     </div>
                     <div class="form-field">
                         <label for="email">Email</label>
-                        <input type="text" id="email" placeholder="Email" name="email">
+                        <input type="text" id="email" value="{{ old('email') }}" placeholder="Email" name="email">
                     </div>
                     <div class="form-field">
                         <label for="message">Message</label>
-                        <textarea name="message" id="message" placeholder="Message..."></textarea>
+                        <textarea name="message" id="message" placeholder="Message...">{{ old('message') }}</textarea>
                     </div>
                     <div class="form-field submit-button-container">
                         <button type="submit" class="btn btn-primary">Submit</button>

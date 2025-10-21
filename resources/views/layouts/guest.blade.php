@@ -32,6 +32,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
+        @include('sweetalert::alert')
         <div class="main-container">
             <x-custom.header />
             {{ $slot }}

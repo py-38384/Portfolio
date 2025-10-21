@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Console;
+use App\Models\Contact;
 use App\Models\Frontend;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -18,7 +19,9 @@ class BackendController extends Controller
         return ['status' => "success", 'message' => 'Project Data Cached!'];
     }
     public function dashboard(){
-        return view('dashboard');
+        $title = 'Admin Dashboard';
+        $contacts = Contact::orderBy('created_at','desc')->paginate(10);
+        return view('dashboard',compact('title','contacts'));
     }
     public function projects(){
         $title = 'All Projects';
@@ -313,5 +316,30 @@ class BackendController extends Controller
         $console->delete();
         Alert::toast('Console Data Deleted','success');
         return redirect()->route('console.index');
+    }
+    public function save_contact(Request $request){
+        $request->validate([
+            "subject" => "required",
+            "full_name" => "required",
+            "email" => "required|email",
+            "message" => "required",
+        ]);
+        Contact::create([
+            "subject" => $request->subject,
+            "full_name" => $request->full_name,
+            "email" => $request->email,
+            "message" => $request->message,
+        ]);
+        Alert::toast('Message Successfully Sent','success');
+        return redirect()->route('home');
+    }
+    public function view_contact(Contact $contact){
+        $title = 'Contact Message From '.$contact->email;
+        return view('admin.contact.show',compact('title','contact'));
+    }
+    public function delete_contact(Contact $contact){
+        $contact->delete();
+        Alert::toast('Contact Message Deleted','success');
+        return redirect()->route('dashboard');
     }
 }
