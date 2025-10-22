@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.index')">
                         {{ __('Blogs') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
+                        {{ __('Category') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('frontend.index')" :active="request()->routeIs('frontend.index')">
                         {{ __('Frontend') }}
                     </x-nav-link>
@@ -82,6 +85,21 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                {{ __('Projects') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.index')">
+                {{ __('Blogs') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
+                {{ __('Category') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('frontend.index')" :active="request()->routeIs('frontend.index')">
+                {{ __('Frontend') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('console.index')" :active="request()->routeIs('console.index')">
+                {{ __('Console') }}
             </x-responsive-nav-link>
         </div>
 

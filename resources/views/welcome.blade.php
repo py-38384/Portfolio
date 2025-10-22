@@ -2,10 +2,10 @@
     <section class="hero-sections">
         <div>
             <div class="hero-title"> &gt; <span class="addition-space">&nbsp</span> <span id="element"></span></div>
-            <p class="small-desc">{{ $fontend->hero_brief }}</p>
+            <p class="small-desc">{{ $frontend->hero_brief }}</p>
         </div>
         <div class="computer-image">
-            <img src="{{ asset('uploads/images/frontend/hero_image/'.$fontend->hero_image) }}" alt="Computer">
+            <img src="{{ asset('uploads/images/frontend/hero_image/'.$frontend->hero_image) }}" alt="Computer">
         </div>
     </section>
 
@@ -62,22 +62,24 @@
         </div>
     </section>
 
+    @if($projects->count())
     <section class="portfolio-section">
         <div class="section-title-and-desc">
-            <h1 class="section-title">{{ $fontend->portfolio_title }}</h1>
-            <p class="section-desc">{{ $fontend->portfolio_desc }}</p>
+            <h1 class="section-title">{{ $frontend->portfolio_title }}</h1>
+            <p class="section-desc">{{ $frontend->portfolio_desc }}</p>
         </div>
         <div class="portfolio-container">
+            @foreach ($projects as $project)
             <div class="portfolio">
                 <div class="image-wrapper">
                     <a class="image-container" href="/assets/images/deshivendor.png">
-                        <img src="/assets/images/deshivendor.png" alt="">
+                        <img src="{{ asset('uploads/images/projects/'.$project->hero_image) }}" alt="{{ $project->project_title }}">
                     </a>
                 </div>
                 <div class="details-container">
-                    <div class="category">E-Commerce</div>
-                    <a href="/portfolios/1" class="title">Multi Vendor E-Commerce</a>
-                    <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eius odit dolorem voluptate vel rem pariatur? Ratione praesentium beatae corporis illo ut repellat, libero nihil. Laborum illo esse maiores nostrum!</div>
+                    <div class="category">{{ $project->category->name }}</div>
+                    <a href="/portfolios/1" class="title">{{ $project->project_title }}</a>
+                    <div class="description">{{ $project->short_description }}</div>
                     <div class="technologis">
                         <span class="technology">HTML</span>
                         <span class="technology">CSS</span>
@@ -89,76 +91,36 @@
                     </div>
                 </div>
             </div>
-            <div class="portfolio">
-                <div class="image-wrapper">
-                    <a class="image-container" href="/assets/images/Smart-Learning.png">
-                        <img src="/assets/images/Smart-Learning.png" alt="">
-                    </a>
-                </div>  
-                <div class="details-container">
-                    <div class="category">E-Learning</div>
-                    <a href="/portfolios/1" class="title">A Fontend Design For A E-Learning Platform</a>
-                    <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eius odit dolorem voluptate vel rem pariatur? Ratione praesentium beatae corporis illo ut repellat, libero nihil. Laborum illo esse maiores nostrum!</div>
-                    <div class="technologis">
-                        <span class="technology">HTML</span>
-                        <span class="technology">CSS</span>
-                        <span class="technology">Javascript</span>
-                    </div>
-                    <div class="button-container">
-                        <a href="" class="btn btn-primary"><span class="icon"><i class="fa-solid fa-up-right-from-square"></i></span>Live Preview</a>
-                        <a href="" class="btn btn-secondary"> &lt;&gt;Source Code</a>
-                    </div>
-                </div>
-            </div>
-            <div class="portfolio">
-                <div class="image-wrapper">
-                    <a class="image-container" href="/assets/images/ultimateorganiclife.png">
-                        <img src="/assets/images/ultimateorganiclife.png" alt="">
-                    </a>
-                </div>
-                <div class="details-container">
-                    <div class="category">E-Commerce</div>
-                    <a href="/portfolios/1" class="title">A Organic Beauty Product Selling E-Commerce Website</a>
-                    <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eius odit dolorem voluptate vel rem pariatur? Ratione praesentium beatae corporis illo ut repellat, libero nihil. Laborum illo esse maiores nostrum!</div>
-                    <div class="technologis">
-                        <span class="technology">HTML</span>
-                        <span class="technology">CSS</span>
-                        <span class="technology">Javascript</span>
-                    </div>
-                    <div class="button-container">
-                        <a href="" class="btn btn-primary"> <span class="icon"><i class="fa-solid fa-up-right-from-square"></i></span>Live Preview</a>
-                        <a href="" class="btn btn-secondary"> &lt;&gt;Source Code</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="see-more-container">
             <a href="{{ route('portfolios') }}" class="btn btn-primary see-more-button">See More</a>
         </div>
     </section>
+    @endif
 
     <section class="about-section">
         <div class="section-title-and-desc">
-            <h1 class="section-title">{{ $fontend->about_title }}</h1>
-            <p class="section-desc">{{ $fontend->about_desc }}</p>
+            <h1 class="section-title">{{ $frontend->about_title }}</h1>
+            <p class="section-desc">{{ $frontend->about_desc }}</p>
         </div>
         <div class="about-me-container">
             <div class="band"></div>
-            <div class="image-container"><img src="{{ asset('uploads/images/frontend/about_image/'.$fontend->about_image) }}" alt=""></div>
+            <div class="image-container"><img src="{{ asset('uploads/images/frontend/about_image/'.$frontend->about_image) }}" alt=""></div>
             <div class="content">
-                <h4>{{ $fontend->about_story_title }}</h4>
+                <h4>{{ $frontend->about_story_title }}</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, veritatis eius sunt et molestias veniam neque vitae amet atque. Ab, placeat? Quisquam itaque quas inventore distinctio quaerat, animi quam error! Eum hic laudantium, debitis repellendus est nihil cupiditate sit molestiae libero et id voluptates corporis consequuntur itaque ipsam optio exercitationem facilis tenetur recusandae voluptatem consequatur fuga accusamus. Quam, consectetur deleniti omnis dignissimos numquam non. Modi perferendis reprehenderit dicta. Labore sit delectus at ab illum culpa sapiente cum facilis reprehenderit eos officia voluptate libero consequuntur nemo explicabo molestiae voluptas reiciendis repellat aliquam aliquid, laudantium, porro ipsum ipsa. Consequuntur architecto modi eum corporis autem. Recusandae provident corrupti officiis labore quas vitae at. Molestiae obcaecati dolores temporibus asperiores non sed fugit ad dicta!</p>
                 <h4>Skills</h4>
                 <div class="skills-icon">
                     @php
-                        $fontend->about_skills_image = json_decode($fontend->about_skills_image);
+                        $frontend->about_skills_image = json_decode($frontend->about_skills_image);
                     @endphp
-                    @foreach ($fontend->about_skills_image as $skill_image)
+                    @foreach ($frontend->about_skills_image as $skill_image)
                     <span class="icon"><img src="{{ asset("uploads/images/frontend/skills_icons/".$skill_image) }}" alt=""></span>
                     @endforeach
                 </div>
                 <div class="CTA-button">
-                    <a href="" class="btn-primary">{{ $fontend->about_button_text }}</a>
+                    <a href="" class="btn-primary">{{ $frontend->about_button_text }}</a>
                 </div>
                 
             </div>
@@ -167,8 +129,8 @@
 
     <section class="blog-section">
         <div class="section-title-and-desc">
-            <h1 class="section-title">{{ $fontend->blog_title }}</h1>
-            <p class="section-desc">{{ $fontend->blog_desc }}</p>
+            <h1 class="section-title">{{ $frontend->blog_title }}</h1>
+            <p class="section-desc">{{ $frontend->blog_desc }}</p>
         </div>
         <div class="blog-container">
             <div class="blog">
@@ -218,12 +180,12 @@
 
     <section class="contact-section">
         <div class="section-title-and-desc">
-            <h1 class="section-title">{{ $fontend->contact_title }}</h1>
-            <p class="section-desc">{{ $fontend->contact_desc }}</p>
+            <h1 class="section-title">{{ $frontend->contact_title }}</h1>
+            <p class="section-desc">{{ $frontend->contact_desc }}</p>
         </div>
         <div class="contact-container">
             <div class="left-side">
-                <div class="represent-image"><img src="{{ asset("uploads/images/frontend/contact_image/$fontend->contact_image") }}" alt=""></div>
+                <div class="represent-image"><img src="{{ asset("uploads/images/frontend/contact_image/$frontend->contact_image") }}" alt=""></div>
             </div>
             <div class="right-side">
                 <form action="{{ route('save.contact') }}" method="post">
@@ -259,7 +221,7 @@
     <script src="/assets/js/typed.js"></script>
     <script>
         var typed = new Typed('#element', {
-        strings: ["{{ $fontend->name }}"],
+        strings: ["{{ $frontend->name }}"],
         typeSpeed: 150,
         });
     </script>

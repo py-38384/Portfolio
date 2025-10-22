@@ -165,7 +165,7 @@ tbody tr:nth-child(odd) td {
 
 @media (max-width: 700px) {
     table.project-table {
-        min-width: 640px;
+        min-width: 1100px;
     }
     td,
     th {

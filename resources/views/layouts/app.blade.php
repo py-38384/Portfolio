@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
         <script>
+            window.frontend = @json($frontend);
             const projectAutoSaveDarftRoute = "{{ route('save-project-darft') }}";
             const blogAutoSaveDarftRoute = "{{ route('save-blog-darft') }}";
         </script>

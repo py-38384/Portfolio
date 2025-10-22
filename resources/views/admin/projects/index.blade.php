@@ -72,37 +72,37 @@
                             </thead>
                             <tbody>
                                 @forelse ($projects as $project)
-                                <tr>
-                                    <td>#{{ $project->id }}</td>
-                                    <td><img src="{{ asset('uploads/images/projects/' . $project->hero_image) }}"
-                                            alt="Project Image" class="project-img"></td>
-                                    <td>
-                                        <div class="project-title">{{ $project->project_title }}</div>
-                                        <div class="project-desc">{{ $project->short_description }}</div>
-                                    </td>
-                                    @if($project->status == 'published')
-                                        <td><span class="status active">Active</span></td>
-                                    @else
-                                        <td><span class="status inactive">Deactive</span></td>
-                                    @endif
-                                    <td>
-                                        <div class="actions">
-                                            <a href="{{ route('projects.edit', $project->id) }}"
-                                                class="btn edit">Edit</a>
-                                            <form action="{{ route('projects.delete', $project->id) }}" method="post"
-                                                id="deleteRequestForm">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn delete">Delete</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>#{{ $project->id }}</td>
+                                        <td><img src="{{ asset('uploads/images/projects/' . $project->hero_image) }}"
+                                                alt="Project Image" class="project-img"></td>
+                                        <td>
+                                            <div class="project-title">{{ $project->project_title }}</div>
+                                            <div class="project-desc">{{ $project->short_description }}</div>
+                                        </td>
+                                        @if($project->status == 'published')
+                                            <td><span class="status active">Active</span></td>
+                                        @else
+                                            <td><span class="status inactive">Deactive</span></td>
+                                        @endif
+                                        <td>
+                                            <div class="actions">
+                                                <a href="{{ route('projects.edit', $project->id) }}"
+                                                    class="btn edit">Edit</a>
+                                                <form action="{{ route('projects.delete', $project->id) }}" method="post"
+                                                    id="deleteRequestForm">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn delete">Delete</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @empty
-                                <tr>
-                                    <td colspan="5" style="text-align: center">No Record Found!</td>
-                                </tr>
-                                @endforelse 
+                                    <tr>
+                                        <td colspan="5" style="text-align: center">No Record Found!</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                         <div>

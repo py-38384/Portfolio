@@ -1,1 +1,1 @@
-<footer>{!! $fontend->copyright_text !!} &copy; {{ date('Y') }} </footer>
+<footer>{!! $frontend->copyright_text !!} &copy; {{ date('Y') }} </footer>

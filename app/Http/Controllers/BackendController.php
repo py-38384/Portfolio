@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
 use App\Models\Console;
 use App\Models\Contact;
 use App\Models\Frontend;
@@ -24,7 +25,7 @@ class BackendController extends Controller
         return view('dashboard',compact('title','contacts'));
     }
     public function projects(){
-        $title = 'All Projects';
+        $title = 'Manage Projects';
         $projects = Project::paginate(10);
         return view('admin.projects.index', compact('projects','title'));
     }
@@ -79,6 +80,7 @@ class BackendController extends Controller
                 'short_description' => $request->short_description,
                 'description' => $request->description,
                 'status' => $request->status,
+                'category_id' => $request->category,
                 'hero_image' => $hero_image,
                 'gallery_image' => json_encode($gallery_images),
         ];
@@ -100,7 +102,8 @@ class BackendController extends Controller
     public function projects_edit(Project $project){
         $title = 'Update Project - '.$project->project_title;
         $project->gallery_images = json_decode($project->gallery_image);
-        return view('admin.projects.form', compact('project', 'title'));
+        $categories = Category::where('for','project')->get();
+        return view('admin.projects.form', compact('project', 'title','categories'));
     }
     public function projects_delete(Project $project){
         $hero_image = $project->hero_image;
@@ -120,7 +123,7 @@ class BackendController extends Controller
         return ['status' => "success", 'message' => 'Blog Data Cached!'];
     }
     public function blogs(){
-        $title = 'All Blogs';
+        $title = ' Manage Blogs';
         $blogs = Blog::paginate(10);
         return view('admin.blogs.index', compact('blogs','title'));
     }
@@ -194,7 +197,7 @@ class BackendController extends Controller
     }
     
     public function frontend(){
-        $title = 'Frontend Data';
+        $title = 'Manage Frontend Data';
 
         $frontend = Frontend::getItem();
         $frontend->skills_icons = json_decode($frontend->about_skills_image);
@@ -279,7 +282,7 @@ class BackendController extends Controller
         return redirect()->route('frontend.index');
     }
     public function console(){
-        $title = 'Console Data';
+        $title = 'Manage Console Data';
 
         $consoles = Console::paginate(10);
 
@@ -352,5 +355,48 @@ class BackendController extends Controller
         $contact->delete();
         Alert::toast('Contact Message Deleted','success');
         return redirect()->route('dashboard');
+    }
+    public function category_index(){
+        $title = "Manage Category";
+        $categories = Category::paginate(10);
+        return view('admin.category.index', compact('title','categories'));
+    }
+    public function category_create(){
+        $title = "Create Category";
+        return view('admin.category.form',compact('title'));
+    }
+    public function category_store(Request $request, Category $category = null){
+        $request->validate([
+            'name' => 'required',
+            'for' => 'required'
+        ]);
+        $is_created = true;
+        if($category){
+            $is_created = false;
+            $category->update([
+                'for' => $request->for, 
+                'name' => $request->name
+            ]);
+        } else {
+            $category = Category::create([
+                'for' => $request->for, 
+                'name' => $request->name
+            ]);
+        }
+        if($is_created){
+            Alert::toast('Category Created','success');
+        } else {
+            Alert::toast('Category Updated','success');
+        }
+        return redirect()->route('category.index');
+    }
+    public function category_edit(Category $category){
+        $title = "Edit Category";
+        return view('admin.category.form',compact('title','category'));
+    }
+    public function category_delete(Category $category){
+        $category->delete();
+        Alert::toast('Category Deleted','success');
+        return redirect()->route('category.index');
     }
 }

@@ -28,7 +28,7 @@
                 /* --primary-text-color: #2f435c; */
                 --primary-text-color: #091729;
 
-                @if($fontend->current_theme_color == 'blue') 
+                @if($frontend->current_theme_color == 'blue') 
                 /* preset 1 */
                 --primary-body-color: #003BFC17;
                 --active-text-color: #4184ff;
@@ -36,7 +36,7 @@
                 --box-shadow-color: #1831534D;
                 @endif
 
-                @if($fontend->current_theme_color == 'navy')
+                @if($frontend->current_theme_color == 'navy')
                 /* preset 2 */
                 --primary-body-color: #18315334;
                 --active-text-color: #183153;
@@ -44,7 +44,7 @@
                 --box-shadow-color: #aec0e2;
                 @endif
 
-                @if($fontend->current_theme_color == 'green')
+                @if($frontend->current_theme_color == 'green')
                 /* preset 3 */
                 --primary-body-color: #001AFF0C;
                 --active-text-color: #00AA4D;
@@ -52,7 +52,7 @@
                 --box-shadow-color: #14382448;
                 @endif
 
-                @if($fontend->current_theme_color == 'red')
+                @if($frontend->current_theme_color == 'red')
                 /* preset 4 */
                 --primary-body-color: #FC000D17;
                 --active-text-color: #FF4141;
@@ -60,11 +60,11 @@
                 --box-shadow-color: #5318184D;
                 @endif
                 
-                @if($fontend->current_theme_color == 'custom') 
-                --primary-body-color: {{ $fontend->theme_colors['primary_body_color'] }};
-                --active-text-color: {{ $fontend->theme_colors['active_text_color'] }};
-                --outline-default-color: {{ $fontend->theme_colors['outline_default_color'] }};
-                --box-shadow-color: {{ $fontend->theme_colors['box_shadow_color'] }};
+                @if($frontend->current_theme_color == 'custom') 
+                --primary-body-color: {{ $frontend->theme_colors['primary_body_color'] }};
+                --active-text-color: {{ $frontend->theme_colors['active_text_color'] }};
+                --outline-default-color: {{ $frontend->theme_colors['outline_default_color'] }};
+                --box-shadow-color: {{ $frontend->theme_colors['box_shadow_color'] }};
                 @endif
 
 

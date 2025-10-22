@@ -13,7 +13,7 @@ abstract class Controller
     public function __construct(){
         $GeneralSetting = GeneralSetting::getItem();
         View::share('GeneralSetting', $GeneralSetting);
-        $fontend = Frontend::getItem();
-        View::share('fontend', $fontend);
+        $frontend = Frontend::getItem();
+        View::share('frontend', $frontend);
     }
 }

@@ -56,13 +56,29 @@
         </div>
 
         <div class="custom-colors-container" style="display: @if($frontend->current_theme_color != "custom") none @endif ;">
-            <label for="primary_body_color"><span>--primary-body-color:</span><x-text-input id="primary_body_color" name="primary_body_color" type="text" placeholder="--primary-body-color" class="mt-1" value="{{ $fontend->theme_colors['primary_body_color'] }}"/></label>
-          
-            <label for="active_text_color"><span>--active-text-color:</span> <x-text-input id="active_text_color" name="active_text_color" type="text" placeholder="--active-text-color" class="mt-1" value="{{ $fontend->theme_colors['active_text_color'] }}"/></label>
-          
-            <label for="outline_default_color"><span>--outline-default-color:</span> <x-text-input id="outline_default_color" name="outline_default_color" type="text" placeholder="--outline-default-color" class="mt-1" value="{{ $fontend->theme_colors['outline_default_color'] }}"/></label>
+          <label for="primary_body_color">
+              <span>--primary-body-color:</span>
+              <x-text-input id="primary_body_color" name="primary_body_color" type="hidden" placeholder="--primary-body-color" class="mt-1" value="{{ $frontend->theme_colors['primary_body_color'] }}"/>
+              <div class="color-picker-1"></div>
+            </label>
+            
+            <label for="active_text_color">
+              <span>--active-text-color:</span> 
+              <x-text-input id="active_text_color" name="active_text_color" type="hidden" placeholder="--active-text-color" class="mt-1" value="{{ $frontend->theme_colors['active_text_color'] }}"/>
+              <div class="color-picker-2"></div>
+            </label>
+            
+            <label for="outline_default_color">
+              <span>--outline-default-color:</span> 
+              <x-text-input id="outline_default_color" name="outline_default_color" type="hidden" placeholder="--outline-default-color" class="mt-1" value="{{ $frontend->theme_colors['outline_default_color'] }}"/>
+              <div class="color-picker-3"></div>
+            </label>
 
-            <label for="box_shadow_color"><span>--box-shadow-color:</span> <x-text-input id="box_shadow_color" name="box_shadow_color" type="text" placeholder="--box-shadow-color" class="mt-1" value="{{ $fontend->theme_colors['box_shadow_color'] }}"/></label>
+            <label for="box_shadow_color">
+              <span>--box-shadow-color:</span> 
+              <x-text-input id="box_shadow_color" name="box_shadow_color" type="hidden" placeholder="--box-shadow-color" class="mt-1" value="{{ $frontend->theme_colors['box_shadow_color'] }}"/>
+              <div class="color-picker-4"></div>
+            </label>
         </div>
 
         <div class="form-group">

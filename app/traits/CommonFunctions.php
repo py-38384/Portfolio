@@ -135,4 +135,7 @@ trait CommonFunctions
         }
         
     }
+    function EditorJsDataToHtml($data){
+        dd($data);
+    }
 }

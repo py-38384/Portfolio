@@ -37,6 +37,17 @@
             value="{{ old('project_title', isset($project)? $project->project_title: '') }}" required  autocomplete="project_title" />
           <x-input-error class="mt-2" :messages="$errors->get('project_title')" />
         </div>
+        <div class="form-group">
+          <label>Category</label>
+          <div class="select-wrapper">
+            <select class="custom-select" name="category">
+              @foreach ($categories as $category)
+              <option value="{{$category->id}}" @selected(isset($project->category->name) && $project->category->name == $category->name)>{{ $category->name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <x-input-error class="mt-2" :messages="$errors->get('status')" />
+        </div>
 
         <div class="form-group">
           <label>Hero Image</label>

@@ -1,5 +1,6 @@
 import './bootstrap';
 import './editorConfig.js';
+import './colorPicker.js';
 import Swal from 'sweetalert2';
 window.Swal = Swal
 

@@ -30,7 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::delete('/projects/{project}/delete', [BackendController::class, 'projects_delete'])->name('delete');
     });
     Route::name('blogs.')->group(function (){
-        Route::get('/blogs', [BackendController::class, 'blogs'])->name('index');
+        Route::get('/blogs/index', [BackendController::class, 'blogs'])->name('index');
         Route::get('/blogs/create', [BackendController::class, 'blogs_create'])->name('create');
         Route::post('/blogs/store', [BackendController::class, 'blogs_store'])->name('store');
         Route::get('/blogs/{blog}/edit', [BackendController::class, 'blogs_edit'])->name('edit');
@@ -52,6 +52,15 @@ Route::middleware(['auth', 'verified'])->group(function (){
     Route::post('/contact-message',[BackendController::class, 'save_contact'])->name('save.contact');
     Route::get('/contact-message/{contact}/show',[BackendController::class, 'view_contact'])->name('show.contact');
     Route::delete('/contact-message/{contact}',[BackendController::class, 'delete_contact'])->name('delete.contact');
+
+    Route::name('category.')->group(function (){
+        Route::get('/category/index',[BackendController::class, 'category_index'])->name('index');
+        Route::get('/category/create',[BackendController::class, 'category_create'])->name('create');
+        Route::post('/category/store',[BackendController::class, 'category_store'])->name('store');
+        Route::get('/category/{category}/edit',[BackendController::class, 'category_edit'])->name('edit');
+        Route::put('/category/{category}/update',[BackendController::class, 'category_store'])->name('update');
+        Route::delete('/category/{category}/delete',[BackendController::class, 'category_delete'])->name('delete');
+    });
 });
 Route::get('/blogs/{id}', [SiteController::class, 'blogs_details'])->name('blogs.details');
 Route::middleware('auth')->group(function () {
