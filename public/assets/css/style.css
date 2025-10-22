@@ -1,42 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Convergence&family=Saira+Semi+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Raleway:ital,wght@0,100..900;1,100..900&family=SUSE+Mono:ital,wght@0,100..800;1,100..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-:root {
-    --primary-text-color: #2f435c;
-
-    --primary-body-color: #003BFC17;
-    /* --primary-body-color: #18315334; */
-    /* --primary-body-color: #001AFF0C; */
-
-    --active-text-color: #4184ff;
-    /* --active-text-color: #183153; */
-    /* --active-text-color: #00AA4D; */
-
-    --outline-default-color: #4184FF21;
-    /* --outline-default-color: #18315321; */
-    /* --outline-default-color: #00AA4D1C; */
-    
-
-    --box-shadow-color: #1831534D;
-    /* --box-shadow-color: #aec0e2; */
-    /* --box-shadow-color: #14382448; */
-
-    --console-response-text-color:rgb(230 230 0);
-
-    --console-response-anchor-text-color:rgba(0 247 255 / 0.63);
-
-    --slider-arrow-color: gray;
-    --slider-arrow-hover-color: whitesmoke;
-
-    --primary-element-bg-color: white;
-
-    --code-background-color: #353535;
-
-    --code-font-color: lightgray;
-
-    --code-copy-button-font-color: white;
-    --code-copy-button-hover-font-color: darkslategray;
-
-}
 body {
     background-color: var(--primary-body-color);
     color: var(--primary-text-color);
@@ -93,7 +56,7 @@ nav ul li:hover {
     overflow: hidden;
     margin: 40px 0;
     font-size: 18px;
-    box-shadow: 0px 0px 20px rgb(37 37 37);
+    box-shadow: 2px 2px 20px var(--box-shadow-color);
     font-family: "SUSE Mono", sans-serif;
 }
 

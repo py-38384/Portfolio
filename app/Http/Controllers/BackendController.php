@@ -263,6 +263,17 @@ class BackendController extends Controller
         $frontend->contact_image = $contact_image; 
         $frontend->copyright_text = $request->copyright_text;
 
+        $frontend->current_theme_color = $request->current_theme_color;
+        if($request->current_theme_color == 'custom'){
+            $colors = [
+                "primary_body_color" => $request->primary_body_color,
+                "active_text_color" => $request->active_text_color,
+                "outline_default_color" => $request->outline_default_color,
+                "box_shadow_color" => $request->box_shadow_color,
+            ];
+            $frontend->theme_colors = $colors;
+        }
+
         $frontend->save();
         Alert::toast('Frontend Data Update','success');
         return redirect()->route('frontend.index');

@@ -27,6 +27,44 @@
           </div>
         </div>
 
+        <div class="form-group radio-wrapper">
+          <input type="radio" name="current_theme_color" value="blue" id="option-1" @if($frontend->current_theme_color == "blue") checked @endif>
+          <label for="option-1" class="option option-1" style="--main-color: #4184ff;">
+            <div class="dot"></div>
+            <span>Blue</span>
+          </label>
+          <input type="radio" name="current_theme_color" value="navy" id="option-2" @if($frontend->current_theme_color == "navy") checked @endif>
+          <label for="option-2" class="option option-2" style="--main-color: #183153;">
+            <div class="dot"></div>
+            <span>Navy</span>
+          </label>
+          <input type="radio" name="current_theme_color" value="green" id="option-3" @if($frontend->current_theme_color == "green") checked @endif>
+          <label for="option-3" class="option option-3" style="--main-color: #00AA4D;">
+            <div class="dot"></div>
+            <span>Green</span>
+          </label>
+          <input type="radio" name="current_theme_color" value="red" id="option-4" @if($frontend->current_theme_color == "red") checked @endif>
+          <label for="option-4" class="option option-4" style="--main-color:  #FF4141;">
+            <div class="dot"></div>
+            <span>Red</span>
+          </label>
+          <input type="radio" name="current_theme_color" value="custom" id="option-5" @if($frontend->current_theme_color == "custom") checked @endif>
+          <label for="option-5" class="option option-5" style="--main-color:  black;">
+            <div class="dot"></div>
+            <span>Custom</span>
+          </label>
+        </div>
+
+        <div class="custom-colors-container" style="display: @if($frontend->current_theme_color != "custom") none @endif ;">
+            <label for="primary_body_color"><span>--primary-body-color:</span><x-text-input id="primary_body_color" name="primary_body_color" type="text" placeholder="--primary-body-color" class="mt-1" value="{{ $fontend->theme_colors['primary_body_color'] }}"/></label>
+          
+            <label for="active_text_color"><span>--active-text-color:</span> <x-text-input id="active_text_color" name="active_text_color" type="text" placeholder="--active-text-color" class="mt-1" value="{{ $fontend->theme_colors['active_text_color'] }}"/></label>
+          
+            <label for="outline_default_color"><span>--outline-default-color:</span> <x-text-input id="outline_default_color" name="outline_default_color" type="text" placeholder="--outline-default-color" class="mt-1" value="{{ $fontend->theme_colors['outline_default_color'] }}"/></label>
+
+            <label for="box_shadow_color"><span>--box-shadow-color:</span> <x-text-input id="box_shadow_color" name="box_shadow_color" type="text" placeholder="--box-shadow-color" class="mt-1" value="{{ $fontend->theme_colors['box_shadow_color'] }}"/></label>
+        </div>
+
         <div class="form-group">
           <x-input-label for="name" :value="__('Name')" />
           <x-text-input id="name" name="name" type="text" placeholder="Your Name" class="mt-1 block w-full"
@@ -170,7 +208,7 @@
         <div class="form-group">
           <x-input-label for="contact_title" :value="__('Contact Title')" />
           <x-text-input id="contact_title" name="contact_title" type="text" placeholder="Your Name"
-            class="mt-1 block w-full" value="{{ old('contact_title', $frontend->contact_title) }}" required             autocomplete="name" />
+            class="mt-1 block w-full" value="{{ old('contact_title', $frontend->contact_title) }}" required autocomplete="name" />
           <x-input-error class="mt-2" :messages="$errors->get('contact_title')" />
         </div>
         <div class="form-group">
@@ -204,8 +242,9 @@
             autocomplete="copyright_text" />
           <x-input-error class="mt-2" :messages="$errors->get('copyright_text')" />
         </div>
-
-        <button type="submit" class="btn-submit">Save Project</button>
+        <div style="position: sticky; bottom: 0px; background-color: rgb(255 255 255); padding: 20px 0;">
+          <button type="submit" class="btn-submit">Save Project</button>
+        </div>
       </form>
     </div>
   </div>
@@ -213,63 +252,63 @@
   @section('scripts')
     <script>
       document.querySelector('#hero_image').addEventListener('change', (e) => {
-        const file = e.target.files[0]
-        const label = $('.hero-placeholder')[0]
+        const file = e.target.files[0];
+        const label = $('.hero-placeholder')[0];
         if (file) {
-          const placeholder = $('.images-placeholder.hero')[0]
+          const placeholder = $('.images-placeholder.hero')[0];
           if (placeholder) {
-            placeholder.style.display = 'none'
+            placeholder.style.display = 'none';
           }
-          const imageUrl = URL.createObjectURL(file)
-          const imageElement = label.querySelector('.preview')
+          const imageUrl = URL.createObjectURL(file);
+          const imageElement = label.querySelector('.preview');
           imageElement.style.display = 'block';
           imageElement.src = imageUrl;
         }
       })
       document.querySelector('#about_image').addEventListener('change', (e) => {
-        const file = e.target.files[0]
-        const label = $('.about-placeholder')[0]
+        const file = e.target.files[0];
+        const label = $('.about-placeholder')[0];
         if (file) {
-          const placeholder = $('.about-placeholder .images-placeholder.hero')[0]
+          const placeholder = $('.about-placeholder .images-placeholder.hero')[0];
           if (placeholder) {
-            placeholder.style.display = 'none'
+            placeholder.style.display = 'none';
           }
-          const imageUrl = URL.createObjectURL(file)
-          const imageElement = label.querySelector('.preview')
+          const imageUrl = URL.createObjectURL(file);
+          const imageElement = label.querySelector('.preview');
           imageElement.style.display = 'block';
           imageElement.src = imageUrl;
         }
       })
       document.querySelector('#contact_image').addEventListener('change', (e) => {
-        const file = e.target.files[0]
-        const label = $('.contact-placeholder')[0]
+        const file = e.target.files[0];
+        const label = $('.contact-placeholder')[0];
         if (file) {
           const placeholder = $('.contact-placeholder .images-placeholder.hero')[0]
           if (placeholder) {
-            placeholder.style.display = 'none'
+            placeholder.style.display = 'none';
           }
-          const imageUrl = URL.createObjectURL(file)
-          const imageElement = label.querySelector('.preview')
+          const imageUrl = URL.createObjectURL(file);
+          const imageElement = label.querySelector('.preview');
           imageElement.style.display = 'block';
           imageElement.src = imageUrl;
         }
       })
       document.querySelector('#about_skills_images').addEventListener('change', (e) => {
-        const files = Array.from(e.target.files)
-        const label = $('.hero-placeholder')[0]
-        const preview_container = $('.preview-container')[0]
-        preview_container.innerHTML = ''
+        const files = Array.from(e.target.files);
+        const label = $('.hero-placeholder')[0];
+        const preview_container = $('.preview-container')[0];
+        preview_container.innerHTML = '';
         let preview_html = '';
         if (files.length > 0) {
           files.forEach(file => {
-            const imageUrl = URL.createObjectURL(file)
+            const imageUrl = URL.createObjectURL(file);
             preview_html += `
                   <div class="gallery-placeholder">
                     <img class="preview" src="${imageUrl}" alt="">
                   </div>
                 `;
           })
-          preview_container.style.display = 'flex'
+          preview_container.style.display = 'flex';
           preview_container.innerHTML = preview_html;
         } else {
 
@@ -280,11 +319,21 @@
         try {
           const content = await window.editor.save();
           document.getElementById('about_story').value = JSON.stringify(content);
-          e.target.submit()
+          e.target.submit();
         } catch (err) {
           console.error('Auto-save failed:', err);
         }
       }
+      document.querySelectorAll('input[name="current_theme_color"]').forEach((radio) => {
+        radio.addEventListener('change', (e) => {
+          const value = e.target.value;
+          if(value === 'custom'){
+            document.querySelector('.custom-colors-container').style.display = "block";
+          } else {
+            document.querySelector('.custom-colors-container').style.display = "none";
+          }
+        });
+      });
     </script>
   @endsection
 </x-app-layout>

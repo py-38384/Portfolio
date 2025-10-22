@@ -9,4 +9,7 @@ class Frontend extends Model
 {
     use ModelCommonFumctionality;
     protected $guarded = [];
+    protected $casts = [
+        "theme_colors" => "array"
+    ];
 }
