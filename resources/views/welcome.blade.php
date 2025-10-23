@@ -81,9 +81,9 @@
                     <a href="/portfolios/1" class="title">{{ $project->project_title }}</a>
                     <div class="description">{{ $project->short_description }}</div>
                     <div class="technologis">
-                        <span class="technology">HTML</span>
-                        <span class="technology">CSS</span>
-                        <span class="technology">Javascript</span>
+                        @foreach ($project->tags as $tag)
+                        <span class="technology">{{ $tag }}</span>
+                        @endforeach
                     </div>
                     <div class="button-container">
                         <a href="" class="btn btn-primary"><span class="icon"><i class="fa-solid fa-up-right-from-square"></i></span>Live Preview</a>
@@ -174,7 +174,7 @@
             </div>
         </div>
         <div class="see-more-container">
-            <a href="{{ route('blogs.index') }}" class="btn btn-primary see-more-button">See More</a>
+            <a href="{{ route('blogs') }}" class="btn btn-primary see-more-button">See More</a>
         </div>
     </section>
 

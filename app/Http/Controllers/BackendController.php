@@ -52,7 +52,6 @@ class BackendController extends Controller
                 'gallery_images' => 'required',
             ]);
         }
-        
         $hero_image = '';
         if($project){
             $hero_image = $project->hero_image;
@@ -81,6 +80,9 @@ class BackendController extends Controller
                 'description' => $request->description,
                 'status' => $request->status,
                 'category_id' => $request->category,
+                'live_link' => $request->live_link,
+                'source_link' => $request->source_link,
+                'tags' => array_filter($request->tag),
                 'hero_image' => $hero_image,
                 'gallery_image' => json_encode($gallery_images),
         ];
@@ -102,6 +104,7 @@ class BackendController extends Controller
     public function projects_edit(Project $project){
         $title = 'Update Project - '.$project->project_title;
         $project->gallery_images = json_decode($project->gallery_image);
+        $project->tags = json_decode($project->tags);
         $categories = Category::where('for','project')->get();
         return view('admin.projects.form', compact('project', 'title','categories'));
     }

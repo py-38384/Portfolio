@@ -1,0 +1,93 @@
+:root{
+    --tag-text-color: darkslategray;
+    --tag-bg-color: gainsboro;
+}
+
+.select_base_container{
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #E9E9E9;
+}
+.select_base_container .select_search_input{
+    width: 100%;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    background-color: #FFFFFF;
+}
+.select_display{
+    display: flex;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.tag_container{
+    display: flex;
+    gap: 5px;
+    max-width: 90%;
+}
+.select_display input{
+    width: 100%;
+    border: none;
+    box-shadow: none !important;
+    position: relative;
+}
+.select_display input:focus{
+    border-color: transparent !important;
+}
+.select_and_search_container{
+    display: block;
+    background-color: white;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.tag_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5px;
+}
+.tag{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    background-color: var(--tag-bg-color);
+    height: 30px;
+    border-radius: 5px;
+    color: var(--tag-text-color);
+}
+.tag-remove{
+    display: flex;
+    position: relative;
+    top: 0px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.tag-remove:hover{
+    background-color: tomato;
+}
+.tag-remove span{
+    bottom: 8px;
+    left: 1px;
+    position: absolute;
+    width: 15px;
+    height: 2px;
+    background-color: var(--tag-text-color);
+    
+    
+}
+.tag-remove:hover span{
+    background-color: white;
+}
+.tag-remove span:nth-child(1){
+    transform: rotate(45deg);
+}
+.tag-remove span:nth-child(2){
+    transform: rotate(-45deg);
+}
