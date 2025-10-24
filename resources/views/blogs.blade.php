@@ -4,7 +4,7 @@
             <h1 class="section-title main-title mt-10">Blogs</h1>
             <p class="section-desc">Blogs that may be useful for you and of course me.</p>
             <div class="back-to-home">
-                <a href="/"><span class="material-symbols-outlined">arrow_back</span> Back To Home</a>
+                <a href="/"><span class="material-symbols-outlined">arrow_back</span> Back To Home </a>
             </div>
         </div>
         <div class="blog-container blog-container-all">
