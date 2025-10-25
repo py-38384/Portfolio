@@ -12,6 +12,7 @@ Route::get('/portfolios/{id}', [SiteController::class, 'portfolios_details'])->n
 
 Route::get('/blogs', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
+Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 Route::get('/test', [SiteController::class, 'test'])->name('test');
 
 Route::post('/upload-image', [ImageUploadController::class, 'uploadFile']);

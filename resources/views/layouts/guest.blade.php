@@ -49,7 +49,7 @@
                 --primary-body-color: #001AFF0C;
                 --active-text-color: #00AA4D;
                 --outline-default-color: #00AA4D1C;
-                --box-shadow-color: #14382448;
+                --box-shadow-color: #0036182D;
                 @endif
 
                 @if($frontend->current_theme_color == 'red')

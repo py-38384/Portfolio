@@ -31,8 +31,9 @@ class BackendController extends Controller
     }
     public function projects_create(){
         $cached_project = Cache::get('projectCache');
+        $categories = Category::all();
         $title = 'Create New Project';
-        return view('admin.projects.form', compact('cached_project','title'));
+        return view('admin.projects.form', compact('cached_project','title', 'categories'));
     }
     public function projects_store(Request $request, Project $project = null){
         if($project){
@@ -104,7 +105,6 @@ class BackendController extends Controller
     public function projects_edit(Project $project){
         $title = 'Update Project - '.$project->project_title;
         $project->gallery_images = json_decode($project->gallery_image);
-        $project->tags = json_decode($project->tags);
         $categories = Category::where('for','project')->get();
         return view('admin.projects.form', compact('project', 'title','categories'));
     }

@@ -259,7 +259,7 @@
           <x-input-error class="mt-2" :messages="$errors->get('copyright_text')" />
         </div>
         <div style="position: sticky; bottom: 0px; background-color: rgb(255 255 255); padding: 20px 0;">
-          <button type="submit" class="btn-submit">Save Project</button>
+          <button type="submit" class="btn-submit">Save Frontend</button>
         </div>
       </form>
     </div>

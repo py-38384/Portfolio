@@ -1,10 +1,10 @@
 <x-guest-layout>
     <section class="about-section about-page">
         <div class="section-title-and-desc">
-            <h1 class="section-title">{{ $frontend->about_title }}</h1>
-            <p class="section-desc">{{ $frontend->about_desc }}</p>
+            <h1 class="section-title main-title mt-10">About Me</h1>
+            <p class="section-desc">Here is little but about me and what i do.</p>
             <div class="back-to-home">
-                <a href="/"><span class="material-symbols-outlined">arrow_back</span> Back To Home </a>
+                <a href="/"><span class="material-symbols-outlined">arrow_back</span> Back To Home</a>
             </div>
         </div>
         <div class="about-me-container">

@@ -20,53 +20,62 @@ $('.portfolio .image-wrapper').magnificPopup({
 //     type: 'image'
 // });
 
-const slider = document.querySelector('.slider')
-const carousel = document.querySelector('.carousel')
-
-const prev = document.querySelector('.controls .prev')
-const next = document.querySelector('.controls .next')
-let direction = -1
-
-const sliding_proportion = '20%' //  sliding_proportion = 100/number_of_slide
-
-
-prev.addEventListener('click',(e)=>{
-    if(direction === 1){
-        slider.style.transform = `translateX(${sliding_proportion})`
-    }else{
-        carousel.style.justifyContent = 'flex-end'
-        slider.appendChild(slider.firstElementChild)
-        slider.style.transform = `translateX(${sliding_proportion})`
-        direction = 1
+const carousels = document.querySelectorAll('.carousel')
+carousels.forEach(carousel => {
+    const slider = carousel.querySelector('.slider')
+    const prev = carousel.querySelector('.controls .prev')
+    const next = carousel.querySelector('.controls .next')
+    let direction = -1
+    const slide_count = slider.children.length
+    slider.style.width = `${slide_count}00%`
+    
+    const sliding_proportion_number = 100 / slide_count;
+    
+    const sliding_proportion = `${sliding_proportion_number}%`; //  sliding_proportion = 100/number_of_slide
+    
+    if(prev){
+        prev.addEventListener('click',(e)=>{
+            if(direction === 1){
+                slider.style.transform = `translateX(${sliding_proportion})`
+            }else{
+                carousel.style.justifyContent = 'flex-end'
+                slider.appendChild(slider.firstElementChild)
+                slider.style.transform = `translateX(${sliding_proportion})`
+                direction = 1
+            }
+            setTimeout(()=>{
+                slider.style.transition = 'none'
+                slider.prepend(slider.lastElementChild)
+                slider.style.transform = "translateX(0)"
+                setTimeout(()=>{
+                    slider.style.transition = '0.3s'
+                },100)
+            },300)
+        })
     }
-    setTimeout(()=>{
-        slider.style.transition = 'none'
-        slider.prepend(slider.lastElementChild)
-        slider.style.transform = "translateX(0)"
-        setTimeout(()=>{
-            slider.style.transition = '0.3s'
-        },100)
-    },300)
+    
+    if(next){
+        next.addEventListener('click',(e)=>{
+            if(direction === -1){
+                slider.style.transform = `translateX(-${sliding_proportion})`
+            }else{
+                carousel.style.justifyContent = 'flex-start'
+                slider.prepend(slider.lastElementChild)
+                slider.style.transform = `translateX(-${sliding_proportion})`
+                direction = -1
+            }
+            setTimeout(()=>{
+                slider.style.transition = 'none'
+                slider.appendChild(slider.firstElementChild)
+                slider.style.transform = "translateX(0)"
+                setTimeout(()=>{
+                    slider.style.transition = '0.3s'
+                },100)
+            },300)
+        })
+    }
 })
 
-next.addEventListener('click',(e)=>{
-    if(direction === -1){
-        slider.style.transform = `translateX(-${sliding_proportion})`
-    }else{
-        carousel.style.justifyContent = 'flex-start'
-        slider.prepend(slider.lastElementChild)
-        slider.style.transform = `translateX(-${sliding_proportion})`
-        direction = -1
-    }
-    setTimeout(()=>{
-        slider.style.transition = 'none'
-        slider.appendChild(slider.firstElementChild)
-        slider.style.transform = "translateX(0)"
-        setTimeout(()=>{
-            slider.style.transition = '0.3s'
-        },100)
-    },300)
-})
 document.querySelectorAll('pre code').forEach((el) => {
   hljs.highlightElement(el);
   const button = document.createElement('button');

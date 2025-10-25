@@ -148,6 +148,61 @@
         </div>
     </section>
 
+    <section class="testimonial-section">
+        <div class="section-title-and-desc">
+            <h1 class="section-title">Testimonial</h1>
+            <p class="section-desc">Have a look what people have to say about me</p>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="slider">
+                    <section class="testimonial-wrapper">
+                        <div class="testimonial">
+                            <div class="dp"><img src="{{ asset('assets/images/testimonial1.webp') }}" alt=""></div>
+                            <h5 class="name">Devid vescar</h5>
+                            <div class="degisnation">Agency Owner</div>
+                            <p class="testimonial-message">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero consectetur, veritatis id laborum odio animi expedita nihil quibusdam minus repellendus molestias magnam voluptatum ullam eveniet esse rerum, ipsum ratione quisquam recusandae? Quasi beatae id natus. Nisi, beatae eum? Porro, ad! Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quibusdam debitis vel fugit id cum deleniti culpa est. Aspernatur dolore, quaerat dicta voluptatum ea dolorem a necessitatibus minus quasi eos est adipisci voluptatibus animi iste eaque? Incidunt beatae veniam amet explicabo quo dolorem unde, modi eveniet dolorum delectus aspernatur iure ut minus reprehenderit nam magni nobis pariatur, ipsum et a voluptas. Totam dicta nostrum, quas dolorem ipsam blanditiis atque et praesentium consequuntur! Quam illo rerum assumenda impedit eligendi ut beatae aliquam ducimus deserunt perspiciatis provident, omnis aperiam iure dolorum amet libero minus soluta repellat quas fuga sed aspernatur. Consectetur laborum vero molestiae ipsum, dicta harum maxime exercitationem amet tenetur consequatur, mollitia praesentium illum dolorum corporis temporibus accusantium, aut eveniet. Quod. </p>
+                            <div class="star-container">
+                                <x-svgs.star-fill width="25"/> 
+                                <x-svgs.star-fill width="25"/> 
+                                <x-svgs.star-fill width="25"/> 
+                                <x-svgs.star-fill width="25"/> 
+                                <x-svgs.star-outline width="20"/> 
+                            </div>
+                        </div>
+                    </section>
+                    <section class="testimonial-wrapper">
+                        <div class="testimonial">
+                            <div class="dp"><img src="{{ asset('assets/images/testimonial1.webp') }}" alt=""></div>
+                            <h5 class="name">Devid vescar</h5>
+                            <div class="degisnation">Agency Owner</div>
+                            <p class="testimonial-message">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero consectetur, veritatis id laborum odio animi expedita nihil quibusdam minus repellendus molestias magnam voluptatum ullam eveniet esse rerum, ipsum ratione quisquam recusandae? Quasi beatae id natus. Nisi, beatae eum? Porro, ad! </p>
+                            <div class="star-container">
+                                <x-svgs.star-fill width="25"/> 
+                                <x-svgs.star-fill width="25"/> 
+                                <x-svgs.star-fill width="25"/> 
+                                <x-svgs.star-fill width="25"/> 
+                                <x-svgs.star-outline width="20"/> 
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="controls">
+                    <div class="prev arrow">
+                        <div class="arrow-container">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="next arrow">
+                        <div class="arrow-container">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="blog-section">
         <div class="section-title-and-desc">
             <h1 class="section-title">{{ $frontend->blog_title }}</h1>
@@ -272,6 +327,7 @@
                     preloader: false,
                     fixedContentPos: true,
                 });
+                
             });
         </script>
     @endpush

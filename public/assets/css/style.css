@@ -10,23 +10,27 @@ body {
     max-width: 1000px;
     margin: 0 auto;
 }
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+}
 nav ul {
     display: flex;
-    gap: 10px;
+    gap: 30px;
     align-items: center;
     justify-content: center;
-    padding-top: 30px;
 }
 nav ul li {
-    padding: 10px;
     height: 30px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
 }
-nav ul li:hover {
-    color: var(--active-text-color);
+nav ul li .link:hover{
+    color: var(--active-text-color) !important;
 }
 .hero-title {
     font-size: 60px;
@@ -313,6 +317,7 @@ nav ul li:hover {
     border-radius: 20px;
     padding-top: 20px;
     box-shadow: 0px 0px 20px var(--box-shadow-color);
+    margin-bottom: 60px;
 }
 .about-section .about-me-container{
     position: relative;
@@ -371,7 +376,7 @@ nav ul li:hover {
     border-radius: 8px;
 }
 .blog-section{
-    margin-top: 50px;
+    margin-top: 0px;
 }
 .blog-container{
     display: grid;
@@ -522,12 +527,11 @@ footer{
     font-size: 13px;
     padding: 30px 0;
 }
-.greeting{
-    display: none;
+.logo{
     font-size: 35px;
-    font-weight: 500;
-    padding: 20px 0;
+    font-weight: 700;
     text-align: center;
+    text-transform: uppercase;
 }
 .main-title{
     margin-top: 30px;
@@ -607,7 +611,7 @@ footer{
 .slider{
     display: flex;
     height: 100%;
-    width: 500%;
+    /* width: 500%; */
     flex-shrink: 0;
     transition: .3s;
 }
@@ -670,6 +674,9 @@ footer{
     position: absolute;
 }
 /*slider css end*/
+
+
+
 
 .project-description{
     box-shadow: 2px 2px 20px var(--box-shadow-color);
@@ -755,12 +762,28 @@ pre code::-webkit-scrollbar {
 .btn{
     border: 1px solid white;
 }
+.contact-section.contact-page .contact-container{
+    background-color: white;
+    box-shadow: 2px 2px 20px var(--box-shadow-color);
+    border-radius: 10px;
+}
+.contact-section.contact-page .section-title-and-desc{
+    padding-top: 0px;
+}
+.contact-section.contact-page .section-title-and-desc{
+    border-bottom: none;
+}
+.contact-section.contact-page,
 .about-section.about-page{
     border: none;
     box-shadow: none;
+    padding-top: 0;
+    background-color: transparent;
 }
 .about-section.about-page .about-me-container{
     border: 1px solid var(--active-text-color);
+    margin-top: 20px;
+    box-shadow: 2px 2px 20px var(--box-shadow-color);
 }
 .video-container{
     display: flex;
@@ -790,8 +813,107 @@ pre code::-webkit-scrollbar {
 .video-container .video-intro .play-icon img{
     width: 70px;
 }
-
-
+.social-icon a svg{
+    width: 25px;
+}
+.address-card{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.address-card .social-icon{
+    display: flex;
+    gap: 20px;
+}
+.address-card .social-icon a{
+    padding: 15px;
+    background: #F5F6FA;
+    border-radius: 50%;
+    box-shadow: 3px 4px 1px #DFE1E3;
+}
+.address-card .social-icon a:hover{
+    box-shadow: none;
+    transform: scale(0.95);
+}
+.address-card .address-section{
+    display: flex;
+    flex-direction: column;
+    color: var(--primary-text-color);
+}
+.address-card .address-section .address-raw{
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid gainsboro;
+}
+.address-card .address-section .address-raw .icon{
+    font-size: 30px;
+    color: var(--active-text-color);
+}
+.address-card .address-section .address-raw .content{
+    font-size: 17px;
+}
+.address-card .address-section .address-raw .content:hover{
+    text-decoration: underline;
+}
+.testimonial-section .carousel-container {
+    background-color: transparent;
+    box-shadow: none;
+    height: fit-content;
+}
+.testimonial-section .carousel-container .carousel {
+    border: none;
+    outline: none;
+}
+.testimonial-section .carousel-container .carousel section{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 570px;
+}
+.testimonial-section .testimonial-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.testimonial-section .testimonial{
+    background-color: white;
+    width: 80%;
+    padding: 35px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0px 0px 20px var(--box-shadow-color);
+}
+.testimonial-section .testimonial .dp img{
+    width: 75px;
+    border-radius: 50%;
+}
+.testimonial-section .testimonial .name{
+    margin-top: 10px;
+    color: tomato;
+    font-weight: 600;
+    font-size: 25px;
+}
+.testimonial-section .testimonial .degisnation{
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+.testimonial-section .testimonial .star-container{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+.testimonial-section .testimonial .testimonial-message{
+    font-size: 17px;
+    line-height: 30px;
+}
+.testimonial-section .section-desc{
+    margin-bottom: 0;
+}
 /* Custom popup size */
 .mfp-iframe-holder .mfp-content {
     max-width: 1368px;  /* increase for larger video */
@@ -944,6 +1066,37 @@ pre code::-webkit-scrollbar {
     /* .carousel-container{
         height: 450px;
     } */
+    .testimonial-section .testimonial .dp img{
+        width: 70px;
+        border-radius: 50%;
+    }
+    .testimonial-section .testimonial .name{
+        font-size: 20px;
+    }
+    .testimonial-section .testimonial .degisnation{
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+    .testimonial-section .testimonial .testimonial-message{
+        font-size: 14px;
+        line-height: 23px;
+    }
+    .testimonial-section .testimonial {
+        width: 95%;
+    }
+    .testimonial-section .carousel-container {
+        padding: 0;
+    }
+    .testimonial-section .carousel-container .carousel {
+        border: none;
+        outline: none;
+    }
+    .testimonial-section .testimonial {
+        box-shadow: 0px 0px 10px var(--box-shadow-color);
+    }
+    nav{
+        display: none;
+    }
     
 }
 @media screen and (max-width: 740px) {
@@ -1014,6 +1167,28 @@ pre code::-webkit-scrollbar {
     }
     .login-container form .title{
         font-size: 26px;
+    }
+
+    .social-icon a svg{
+        width: 23px;
+    }
+    .address-card .social-icon{
+        flex-wrap: wrap;
+        gap: 17px;
+    }
+    .address-card .social-icon a{
+        padding: 13px;
+    }
+    .address-card .address-section .address-raw .icon {
+        font-size: 25px;
+    }
+    .contact-container.contact-page{
+        flex-direction: column;
+        padding: 10px 15px 20px 15px;
+        margin-bottom: 40px;
+    }
+    .about-section .about-me-container {
+        margin-top: 70px;
     }
 }
 @media screen and (max-width: 485px) {
