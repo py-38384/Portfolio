@@ -51,7 +51,6 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::put('/console/{console}/update', [BackendController::class, 'console_store'])->name('update');
         Route::delete('/console/{console}/delete', [BackendController::class, 'console_delete'])->name('delete');
     });
-    Route::post('/contact-message',[BackendController::class, 'save_contact'])->name('save.contact');
     Route::get('/contact-message/{contact}/show',[BackendController::class, 'view_contact'])->name('show.contact');
     Route::delete('/contact-message/{contact}',[BackendController::class, 'delete_contact'])->name('delete.contact');
 
@@ -64,6 +63,7 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::delete('/category/{category}/delete',[BackendController::class, 'category_delete'])->name('delete');
     });
 });
+    Route::post('/contact-message',[BackendController::class, 'save_contact'])->name('save.contact');
 Route::get('/blogs/{id}', [SiteController::class, 'blogs_details'])->name('blogs.details');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

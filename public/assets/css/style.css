@@ -16,6 +16,74 @@ header{
     justify-content: space-between;
     padding: 20px 0;
 }
+header .menu{
+    font-size: 30px;
+    width: 50px;
+    height: 50px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+header .menu:hover{
+    color: var(--active-text-color);
+    background-color: var(--primary-text-color);
+    border-radius: 50%;
+}
+.responsive-nav-list{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    backdrop-filter: blur(5px);
+    background: rgb(255 255 255);
+    z-index: 2;
+    box-shadow: 0px 0px 15px var(--box-shadow-color);
+    display: none;
+}
+.responsive-nav-list .close-btn-container .logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+}
+.responsive-nav-list .close-btn-container{
+    display: flex;
+    justify-content: space-between;
+}
+.responsive-nav-list .close-btn-container button{
+    font-size: 30px;
+    padding: 10px;
+}
+.responsive-nav-list .close-btn-container button:hover{
+    color: var(--active-text-color) !important;
+}
+.responsive-nav-list ul{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+.responsive-nav-list ul{
+    width: 100%;
+    padding-bottom: 20px;
+}
+.responsive-nav-list ul li{
+    width: 100%;
+}
+.responsive-nav-list ul li a{
+    display: block;
+    width: 100%;
+    padding: 25px 15px;
+}
+.responsive-nav-list ul li a{
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+.responsive-nav-list ul li a:hover{
+    border-color: var(--active-text-color);
+    color: var(--active-text-color) !important;
+}
+
 nav ul {
     display: flex;
     gap: 30px;
@@ -839,6 +907,7 @@ pre code::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     color: var(--primary-text-color);
+    gap: 10px;
 }
 .address-card .address-section .address-raw{
     display: flex;
@@ -914,6 +983,7 @@ pre code::-webkit-scrollbar {
 .testimonial-section .section-desc{
     margin-bottom: 0;
 }
+
 /* Custom popup size */
 .mfp-iframe-holder .mfp-content {
     max-width: 1368px;  /* increase for larger video */
@@ -1094,6 +1164,9 @@ pre code::-webkit-scrollbar {
     .testimonial-section .testimonial {
         box-shadow: 0px 0px 10px var(--box-shadow-color);
     }
+    header .menu{
+        display: block;
+    }
     nav{
         display: none;
     }
@@ -1112,7 +1185,7 @@ pre code::-webkit-scrollbar {
 @media screen and (max-width: 660px) {
     .contact-container {
         flex-direction: column;
-        padding: 20px 30px 40px 30px;
+        padding: 20px;
         margin-bottom: 40px;
     }
     .contact-container .left-side .represent-image img {
@@ -1174,7 +1247,7 @@ pre code::-webkit-scrollbar {
     }
     .address-card .social-icon{
         flex-wrap: wrap;
-        gap: 17px;
+        gap: 10px;
     }
     .address-card .social-icon a{
         padding: 13px;
