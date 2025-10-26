@@ -129,6 +129,19 @@
             autocomplete="about_title" />
           <x-input-error class="mt-2" :messages="$errors->get('about_title')" />
         </div>
+
+        @if (isset($frontend->about_youtube_video_id))
+        <div class="form-group">
+          <iframe class="youtube_video_iframe" src="https://www.youtube.com/embed/{{ $frontend->about_youtube_video_id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        @endif
+
+        <div class="form-group">
+          <x-input-label for="intro_video_link" :value="__('Intro Video Link')" />
+          <x-text-input id="intro_video_link" name="intro_video_link" type="text" placeholder="intro video link" class="mt-1 block w-full" value="https://www.youtube.com/watch?v={{ $frontend->about_youtube_video_id }}" data-value="https://www.youtube.com/watch?v={{ $frontend->about_youtube_video_id }}" autocomplete="intro_video_link" />
+          <x-input-error class="mt-2" :messages="$errors->get('about_desc')" />
+        </div>
+
         <div class="form-group">
           <x-input-label for="about_desc" :value="__('About Desc')" />
           <textarea class="short-desc" name="about_desc" style="min-height: 100px !important;"
@@ -221,6 +234,21 @@
             placeholder="Write a short description of portfolio section..">{{ old('blog_desc', $frontend->blog_desc) }}</textarea>
           <x-input-error class="mt-2" :messages="$errors->get('blog_desc')" />
         </div>
+
+        <div class="form-group">
+          <x-input-label for="testimonial_title" :value="__('Testimonial Title')" />
+          <x-text-input id="testimonial_title" name="testimonial_title" type="text" placeholder="Testimonial Title" class="mt-1 block w-full"
+            value="{{ old('testimonial_title', $frontend->testimonial_title) }}" required autocomplete="testimonial_title" />
+          <x-input-error class="mt-2" :messages="$errors->get('testimonial_title')" />
+        </div>
+        <div class="form-group">
+          <x-input-label for="testimonial_desc" :value="__('Testimonial Desc')" />
+          <textarea class="short-desc" name="testimonial_desc" style="min-height: 100px !important;"
+            placeholder="Write a short description of portfolio section..">{{ old('testimonial_desc', $frontend->testimonial_desc) }}</textarea>
+          <x-input-error class="mt-2" :messages="$errors->get('testimonial_desc')" />
+        </div>
+
+
         <div class="form-group">
           <x-input-label for="contact_title" :value="__('Contact Title')" />
           <x-text-input id="contact_title" name="contact_title" type="text" placeholder="Your Name"
@@ -258,7 +286,7 @@
             autocomplete="copyright_text" />
           <x-input-error class="mt-2" :messages="$errors->get('copyright_text')" />
         </div>
-        <div style="position: sticky; bottom: 0px; background-color: rgb(255 255 255); padding: 20px 0;">
+        <div style="position: sticky; bottom: 0px; background-color: rgb(255 255 255); padding: 20px 0; z-index: 10;">
           <button type="submit" class="btn-submit">Save Frontend</button>
         </div>
       </form>
@@ -349,6 +377,18 @@
             document.querySelector('.custom-colors-container').style.display = "none";
           }
         });
+      });
+      document.querySelector('#intro_video_link').addEventListener('focus', e => {
+        const field = e.target;
+        field.value = '';
+      });
+      document.querySelector('#intro_video_link').addEventListener('blur', e => {
+        const field = e.target;
+        if(!field.value){
+          field.value = field.dataset.value;
+        } else {
+          field.dataset.value = field.value; 
+        }
       });
     </script>
   @endsection

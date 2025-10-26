@@ -135,7 +135,26 @@ trait CommonFunctions
         }
         
     }
+    function getBlockHtml($block){
+        $html = '';
+        if($block->type == 'paragraph'){
+            $html .= "<p>{$block->data->text}</p>";
+        }
+        return $html;
+    }
     function EditorJsDataToHtml($data){
-        dd($data);
+        $json_date = json_decode($data);
+        $blocks = $json_date->blocks;
+        $html = '';
+        foreach ($blocks as $key => $block) {
+            $html .= $this->getBlockHtml($block);
+        }
+        return $html;
+    }
+    function randomRGB() {
+        $r = rand(0, 255);
+        $g = rand(0, 255);
+        $b = rand(0, 255);
+        return "rgb($r, $g, $b)";
     }
 }

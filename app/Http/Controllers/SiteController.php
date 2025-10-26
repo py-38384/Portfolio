@@ -6,6 +6,8 @@ use App\Models\Blog;
 use App\Models\Console;
 use App\Models\Project;
 use App\Models\Frontend;
+use App\Models\SocialIcon;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -14,7 +16,8 @@ class SiteController extends Controller
         $console = Console::all();
         $projects = Project::with('category')->orderBy('created_at','desc')->where('status','published')->limit(5)->get();
         $blogs = Blog::orderBy('created_at','desc')->where('status','published')->limit(5)->get();
-        return view('welcome', compact('console','projects','blogs'));
+        $testimonials = Testimonial::all();
+        return view('welcome', compact('console','projects', 'blogs', 'testimonials'));
     }
     public function portfolios(){
         return view('projects.portfolio');
@@ -26,13 +29,15 @@ class SiteController extends Controller
         return view('blogs');
     }
     public function blogs_details($id){
+        
         return view('blogs.details');
     }
     public function about(){
         return view('about');
     }
     public function contact(){
-        return view('contact');
+        $social_icons = SocialIcon::all();
+        return view('contact', compact('social_icons'));
     }
     public function test(){
         return view('test');

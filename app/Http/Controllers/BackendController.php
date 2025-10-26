@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\Category;
 use App\Models\Console;
 use App\Models\Contact;
-use App\Models\Frontend;
 use App\Models\Project;
+use App\Models\Category;
+use App\Models\Frontend;
+use App\Models\SocialIcon;
+use App\Models\Testimonial;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -160,11 +163,17 @@ class BackendController extends Controller
             $this->batchDelete($hero_image, public_path('uploads/images/blogs/'));
             $hero_image = $this->imageUploadKeepOriginalName(file: $request->hero_image, full_path: public_path("uploads/images/blogs"), only_name: true);
         }
+        $tag_array = [];
+        foreach (array_filter($request->tag) as $key => $tag) {
+            $tag_array[] = ['value' => $tag, 'color' => $this->randomRGB()];
+        }
         $data = [
                 'blog_title' => $request->blog_title,
                 'short_description' => $request->short_description,
                 'description' => $request->description,
                 'status' => $request->status,
+                'tags' => $tag_array,
+                'slug' => Str::slug($request->blog_title),
                 'hero_image' => $hero_image,
         ];
         $is_created = true;
@@ -237,8 +246,19 @@ class BackendController extends Controller
         }
         $frontend->about_image = $about_image;
 
+        preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $request->intro_video_link, $match);
+        if(isset($match[1])){
+            $youtube_id = $match[1];
+            $frontend->about_youtube_video_id = $youtube_id;            
+        } else {
+            $frontend->about_youtube_video_id = $request->intro_video_link;
+        }
+
         $frontend->about_story_title = $request->about_story_title;
         $frontend->about_story = $request->about_story;
+
+        $frontend->testimonial_title = $request->testimonial_title;
+        $frontend->testimonial_desc = $request->testimonial_desc;
 
         $about_skills_images = [];
         if($frontend->about_skills_image){
@@ -401,5 +421,99 @@ class BackendController extends Controller
         $category->delete();
         Alert::toast('Category Deleted','success');
         return redirect()->route('category.index');
+    }
+
+    public function testimonial_index(){
+        $title = "Manage Testimonial";
+        $testimonials = Testimonial::paginate(10);
+        return view('admin.testimonial.index', compact('title','testimonials'));
+    }
+    public function testimonial_create(){
+        $title = "Create Testimonial";
+        return view('admin.testimonial.form',compact('title'));
+    }
+    public function testimonial_store(Request $request, Testimonial $testimonial){
+        $request->validate([
+            "name" => ['required'],
+            "designation" => ['sometimes','nullable'],
+            "message" => ['required'],
+            "stars" => ['required','numeric'],
+        ]);
+        $image = '';
+        $creating = true;
+        if($testimonial){
+            $creating = false;
+            $image = $testimonial->image;
+        } else {
+            $testimonial = new Testimonial();
+        }
+        if($request->hasFile('image')){
+            $this->batchDelete($image, public_path('uploads/images/testimonial/'));
+            $image = $this->imageUploadKeepOriginalName(file: $request->image, full_path: public_path("uploads/images/testimonial/"), only_name: true);
+        }
+        $testimonial->image = $image;
+        $testimonial->name = $request->name;
+        $testimonial->designation = $request->designation;
+        $testimonial->message = $request->message;
+        $testimonial->stars = $request->stars;
+        $testimonial->save();
+        if($creating){
+            Alert::toast('testimonial Created','success');
+        } else {
+            Alert::toast('testimonial Updated','success');
+        }
+        return redirect()->route('testimonial.index');
+    }
+    public function testimonial_edit(Testimonial $testimonial){
+        $title = 'Update Testimonial - '.$testimonial->project_title;
+        return view('admin.testimonial.form', compact('testimonial', 'title'));
+    }
+    public function testimonial_delete(Testimonial $testimonial){
+        $image = $testimonial->image;
+        $this->batchDelete($image, public_path('uploads/images/testimonial/'));
+        $testimonial->delete();
+
+        Alert::toast('Testimonial Deleted','success');
+        return redirect()->route('testimonial.index');
+    }
+    
+    public function social_icon_index(){
+        $title = "Manage Social Icons";
+        $social_icons = SocialIcon::paginate(10);
+        return view('admin.social_icon.index', compact('title','social_icons'));
+    }
+    public function social_icon_create(){
+        $title = "Create Social Icon";
+        return view('admin.social_icon.form',compact('title'));
+    }
+    public function social_icon_store(Request $request,SocialIcon $social_icon){
+        $request->validate([
+            'svg' => 'required',
+            'link' => 'required',
+        ]);
+        $creating = true;
+        if($social_icon){
+            $creating = false;
+        } else {
+            $social_icon = new SocialIcon();
+        }
+        $social_icon->icon = $request->svg;
+        $social_icon->link = $request->link;
+        $social_icon->save();
+        if($creating){
+            Alert::toast('Social Icon Created','success');
+        } else {
+            Alert::toast('Social Icon Updated','success');
+        }
+        return redirect()->route('social_icon.index');
+    }
+    public function social_icon_edit(SocialIcon $social_icon){
+        $title = "Update Social Icon";
+        return view('admin.social_icon.form',compact('title','social_icon'));
+    }
+    public function social_icon_delete(SocialIcon $social_icon){
+        $social_icon->delete();
+        Alert::toast('Social Icon Deleted','success');
+        return redirect()->route('social_icon.index');
     }
 }

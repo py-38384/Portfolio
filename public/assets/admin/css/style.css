@@ -41,6 +41,10 @@
   font-size: 0.67em;
   font-weight: bold;
 }
+.youtube_video_iframe{
+    width: 500px;
+    height: 300px;
+}
 .btn {
     background-color:var(--button-bg);
     color: white;
@@ -483,8 +487,9 @@ textarea {
 .radio-wrapper{
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 15px;
+    flex-wrap: wrap;
     width: fit-content;
 }
 .radio-wrapper input[type='radio']{
@@ -570,5 +575,16 @@ textarea {
     }
     .gallery-placeholder .images-placeholder {
         font-size: 30px;
+    }
+}
+@media screen and (max-width: 580px) {
+    .youtube_video_iframe{
+        width: 400px;
+        height: 250px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .youtube_video_iframe{
+        width: 100%;
     }
 }

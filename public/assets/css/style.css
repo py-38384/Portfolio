@@ -469,12 +469,6 @@ nav ul li .link:hover{
     padding: 7px;
     border-radius: 10px;
 }
-.blog-container .tag-container .tag:nth-child(1){
-    background-color: #86EF94;
-}
-.blog-container .tag-container .tag:nth-child(2){
-    background-color: #E191F7;
-}
 .blog-container .content-container .title{
     font-size: 25px;
     font-weight: 500;
@@ -954,20 +948,24 @@ pre code::-webkit-scrollbar {
     flex-direction: column;
     text-align: center;
     box-shadow: 0px 0px 20px var(--box-shadow-color);
+    position: relative;
 }
 .testimonial-section .testimonial .dp img{
     width: 75px;
+    height: 75px;
+    object-fit: fill;
     border-radius: 50%;
 }
 .testimonial-section .testimonial .name{
     margin-top: 10px;
-    color: tomato;
+    color: rgb(150 0 0);
     font-weight: 600;
     font-size: 25px;
 }
-.testimonial-section .testimonial .degisnation{
-    font-size: 13px;
+.testimonial-section .testimonial .designation{
+    font-size: 16px;
     margin-bottom: 15px;
+    font-style: italic;
 }
 .testimonial-section .testimonial .star-container{
     display: flex;
@@ -983,6 +981,14 @@ pre code::-webkit-scrollbar {
 .testimonial-section .section-desc{
     margin-bottom: 0;
 }
+.testimonial-section .testimonial .quote-mark{
+    font-size: 95px; 
+    position: absolute; 
+    top: 170px;
+    opacity: .1;
+}
+
+
 
 /* Custom popup size */
 .mfp-iframe-holder .mfp-content {

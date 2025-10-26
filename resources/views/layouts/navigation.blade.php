@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 xl:px-6 2xl:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -11,34 +11,40 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 xl:-my-px xl:ms-10 xl:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+                    <x-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.*')">
                         {{ __('Projects') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.index')">
+                    <x-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.*')">
                         {{ __('Blogs') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
+                    <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.*')">
                         {{ __('Category') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('frontend.index')" :active="request()->routeIs('frontend.index')">
+                    <x-nav-link :href="route('frontend.index')" :active="request()->routeIs('frontend.*')">
                         {{ __('Frontend') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('console.index')" :active="request()->routeIs('console.index')">
+                    <x-nav-link :href="route('console.index')" :active="request()->routeIs('console.*')">
                         {{ __('Console') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('testimonial.index')" :active="request()->routeIs('testimonial.*')">
+                        {{ __('Testimonial') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('social_icon.index')" :active="request()->routeIs('social_icon.*')">
+                        {{ __('Social Icon') }}
                     </x-nav-link>
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden xl:flex xl:items-center xl:ms-6">
                 <a href="/" target="_blank" class="text-gray-700" style="font-size: 25px;"><i class="fa-solid fa-earth-americas"></i></a>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -69,7 +75,7 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
+            <div class="-me-2 flex items-center xl:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -81,25 +87,31 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden xl:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
+            <x-responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.*')">
                 {{ __('Projects') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.index')">
+            <x-responsive-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.*')">
                 {{ __('Blogs') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('category.index')" :active="request()->routeIs('category.index')">
+            <x-responsive-nav-link :href="route('category.index')" :active="request()->routeIs('category.*')">
                 {{ __('Category') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('frontend.index')" :active="request()->routeIs('frontend.index')">
+            <x-responsive-nav-link :href="route('frontend.index')" :active="request()->routeIs('frontend.*')">
                 {{ __('Frontend') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('console.index')" :active="request()->routeIs('console.index')">
+            <x-responsive-nav-link :href="route('console.index')" :active="request()->routeIs('console.*')">
                 {{ __('Console') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('testimonial.index')" :active="request()->routeIs('testimonial.*')">
+                {{ __('Testimonial') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('social_icon.index')" :active="request()->routeIs('social_icon.*')">
+                {{ __('Social Icon') }}
             </x-responsive-nav-link>
         </div>
 

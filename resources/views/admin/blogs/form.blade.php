@@ -54,7 +54,20 @@
           <input type="file" style="display: none;" name="hero_image" id="hero_image">
           <x-input-error class="mt-2" :messages="$errors->get('hero_image')" />
         </div>
-
+        <div class="form-group">
+          <div style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap;" class="tag-container">
+            @if (isset($blog->tags))
+              @foreach ($blog->tags as $tag)
+                <x-text-input id="tag" name="tag[]" type="text" class="mt-1" value="{{ $tag->value }}" placeholder="tag"
+                autocomplete="tag"/>
+              @endforeach
+              @else
+              <x-text-input id="tag" name="tag[]" type="text" class="mt-1"  placeholder="tag"
+              autocomplete="tag"/>
+            @endif
+          </div>
+          <button type="submit" class="btn-submit add-tag-button">Add Tag</button>
+        </div>
         <div class="form-group">
           <label>Short Description</label>
           <textarea class="short-desc" name="short_description" placeholder="Write a short summary...">{{ old('short_description', isset($blog)?$blog->short_description: '') }}</textarea>
@@ -79,7 +92,9 @@
           <x-input-error class="mt-2" :messages="$errors->get('status')" />
         </div>
 
-        <button type="submit" class="btn-submit">Save Project</button>
+        <div style="position: sticky; bottom: 0px; background-color: rgb(255 255 255); padding: 20px 0; z-index: 10;">
+          <button type="submit" class="btn-submit">Save Blog</button>
+        </div>
       </form>
     </div>
   </div>
@@ -143,6 +158,30 @@
               // 
           }
       }, 5000);
+      const addTagButton = document.querySelector('.add-tag-button');
+      const tagContainer = document.querySelector('.tag-container');
+      addTagButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        const tagInput = document.createElement('input');
+        tagInput.classList.add(
+          "border-gray-300",
+          "dark:border-gray-700",
+          "dark:bg-gray-900",
+          "dark:text-gray-300",
+          "focus:border-indigo-500",
+          "dark:focus:border-indigo-600",
+          "focus:ring-indigo-500",
+          "dark:focus:ring-indigo-600",
+          "rounded-md",
+          "shadow-sm",
+          "mt-1",
+        );
+        tagInput.id = "tag";
+        tagInput.name = "tag[]";
+        tagInput.type = "text";
+        tagInput.placeholder = "tag";
+        tagContainer.append(tagInput);
+      })
     </script>
   @endsection
 </x-app-layout>

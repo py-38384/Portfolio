@@ -67,15 +67,14 @@
         <div class="form-group">
           <x-input-label for="live_link" :value="__('Live Link')" />
           <x-text-input id="live_link" name="live_link" type="text" class="mt-1 block w-full"
-            value="{{ old('live_link', isset($project) ? $project->live_link : '') }}" placeholder="Live Link" required
+            value="{{ old('live_link', isset($project) ? $project->live_link : '') }}" placeholder="Live Link"
             autocomplete="live_link" />
           <x-input-error class="mt-2" :messages="$errors->get('live_link')" />
         </div>
         <div class="form-group">
           <x-input-label for="source_link" :value="__('Source Link')" />
           <x-text-input id="source_link" name="source_link" type="text" class="mt-1 block w-full"
-            value="{{ old('source_link', isset($project) ? $project->source_link : '') }}" placeholder="Source Link"
-            required autocomplete="source_link" />
+            value="{{ old('source_link', isset($project) ? $project->source_link : '') }}" placeholder="Source Link" autocomplete="source_link" />
           <x-input-error class="mt-2" :messages="$errors->get('source_link')" />
         </div>
 

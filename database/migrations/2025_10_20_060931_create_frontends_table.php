@@ -26,13 +26,13 @@ return new class extends Migration
             $table->string('about_story_title')->nullable();
             $table->text('about_story')->nullable();
             $table->text('about_skills_image')->nullable();
-            $table->text('about_button_text')->nullable();
-            $table->text('blog_title')->nullable();
-            $table->text('blog_desc')->nullable();
-            $table->text('contact_title')->nullable();
-            $table->text('contact_desc')->nullable();
-            $table->text('contact_image')->nullable();
-            $table->text('copyright_text')->nullable();
+            $table->string('about_button_text')->nullable();
+            $table->string('blog_title')->nullable();
+            $table->string('blog_desc')->nullable();
+            $table->string('contact_title')->nullable();
+            $table->string('contact_desc')->nullable();
+            $table->string('contact_image')->nullable();
+            $table->string('copyright_text')->nullable();
             $table->timestamps();
         });
     }

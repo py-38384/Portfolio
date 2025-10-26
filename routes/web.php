@@ -20,10 +20,10 @@ Route::post('/fetch-image', [ImageUploadController::class, 'uploadByUrl']);
 Route::post('/save-project-darft', [BackendController::class, 'save_project_darft'])->name('save-project-darft');
 Route::post('/save-blog-darft', [BackendController::class, 'save_blog_darft'])->name('save-blog-darft');
 
-Route::middleware(['auth', 'verified'])->group(function (){
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [BackendController::class, 'dashboard'])->name('dashboard');
 
-    Route::name('projects.')->group(function (){
+    Route::name('projects.')->group(function () {
         Route::get('/projects', [BackendController::class, 'projects'])->name('index');
         Route::get('/projects/create', [BackendController::class, 'projects_create'])->name('create');
         Route::post('/projects/store', [BackendController::class, 'projects_store'])->name('store');
@@ -31,7 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::put('/projects/{project}/update', [BackendController::class, 'projects_store'])->name('update');
         Route::delete('/projects/{project}/delete', [BackendController::class, 'projects_delete'])->name('delete');
     });
-    Route::name('blogs.')->group(function (){
+    Route::name('blogs.')->group(function () {
         Route::get('/blogs/index', [BackendController::class, 'blogs'])->name('index');
         Route::get('/blogs/create', [BackendController::class, 'blogs_create'])->name('create');
         Route::post('/blogs/store', [BackendController::class, 'blogs_store'])->name('store');
@@ -39,11 +39,11 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::put('/blogs/{blog}/update', [BackendController::class, 'blogs_store'])->name('update');
         Route::delete('/blogs/{blog}/delete', [BackendController::class, 'blogs_delete'])->name('delete');
     });
-    Route::name('frontend.')->group(function (){
+    Route::name('frontend.')->group(function () {
         Route::get('/frontend', [BackendController::class, 'frontend'])->name('index');
         Route::put('/frontend/store', [BackendController::class, 'frontend_store'])->name('store');
     });
-    Route::name('console.')->group(function (){
+    Route::name('console.')->group(function () {
         Route::get('/console', [BackendController::class, 'console'])->name('index');
         Route::get('/console/create', [BackendController::class, 'console_create'])->name('create');
         Route::post('/console/store', [BackendController::class, 'console_store'])->name('store');
@@ -51,19 +51,35 @@ Route::middleware(['auth', 'verified'])->group(function (){
         Route::put('/console/{console}/update', [BackendController::class, 'console_store'])->name('update');
         Route::delete('/console/{console}/delete', [BackendController::class, 'console_delete'])->name('delete');
     });
-    Route::get('/contact-message/{contact}/show',[BackendController::class, 'view_contact'])->name('show.contact');
-    Route::delete('/contact-message/{contact}',[BackendController::class, 'delete_contact'])->name('delete.contact');
+    Route::get('/contact-message/{contact}/show', [BackendController::class, 'view_contact'])->name('show.contact');
+    Route::delete('/contact-message/{contact}', [BackendController::class, 'delete_contact'])->name('delete.contact');
 
-    Route::name('category.')->group(function (){
-        Route::get('/category/index',[BackendController::class, 'category_index'])->name('index');
-        Route::get('/category/create',[BackendController::class, 'category_create'])->name('create');
-        Route::post('/category/store',[BackendController::class, 'category_store'])->name('store');
-        Route::get('/category/{category}/edit',[BackendController::class, 'category_edit'])->name('edit');
-        Route::put('/category/{category}/update',[BackendController::class, 'category_store'])->name('update');
-        Route::delete('/category/{category}/delete',[BackendController::class, 'category_delete'])->name('delete');
+    Route::name('category.')->group(function () {
+        Route::get('/category/index', [BackendController::class, 'category_index'])->name('index');
+        Route::get('/category/create', [BackendController::class, 'category_create'])->name('create');
+        Route::post('/category/store', [BackendController::class, 'category_store'])->name('store');
+        Route::get('/category/{category}/edit', [BackendController::class, 'category_edit'])->name('edit');
+        Route::put('/category/{category}/update', [BackendController::class, 'category_store'])->name('update');
+        Route::delete('/category/{category}/delete', [BackendController::class, 'category_delete'])->name('delete');
+    });
+    Route::name('testimonial.')->group(function () {
+        Route::get('/testimonial/index', [BackendController::class, 'testimonial_index'])->name('index');
+        Route::get('/testimonial/create', [BackendController::class, 'testimonial_create'])->name('create');
+        Route::post('/testimonial/store', [BackendController::class, 'testimonial_store'])->name('store');
+        Route::get('/testimonial/{testimonial}/edit', [BackendController::class, 'testimonial_edit'])->name('edit');
+        Route::put('/testimonial/{testimonial}/update', [BackendController::class, 'testimonial_store'])->name('update');
+        Route::delete('/testimonial/{testimonial}/delete', [BackendController::class, 'testimonial_delete'])->name('delete');
+    });
+    Route::name('social_icon.')->group(function () {
+        Route::get('/social_icon/index', [BackendController::class, 'social_icon_index'])->name('index');
+        Route::get('/social_icon/create', [BackendController::class, 'social_icon_create'])->name('create');
+        Route::post('/social_icon/store', [BackendController::class, 'social_icon_store'])->name('store');
+        Route::get('/social_icon/{social_icon}/edit', [BackendController::class, 'social_icon_edit'])->name('edit');
+        Route::put('/social_icon/{social_icon}/update', [BackendController::class, 'social_icon_store'])->name('update');
+        Route::delete('/social_icon/{social_icon}/delete', [BackendController::class, 'social_icon_delete'])->name('delete');
     });
 });
-    Route::post('/contact-message',[BackendController::class, 'save_contact'])->name('save.contact');
+Route::post('/contact-message', [BackendController::class, 'save_contact'])->name('save.contact');
 Route::get('/blogs/{id}', [SiteController::class, 'blogs_details'])->name('blogs.details');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -72,4 +88,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

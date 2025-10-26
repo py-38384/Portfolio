@@ -88,9 +88,12 @@
                                 @endforeach
                             </div>
                             <div class="button-container">
-                                <a href="" class="btn btn-primary"><span class="icon"><i
-                                            class="fa-solid fa-up-right-from-square"></i></span>Live Preview</a>
-                                <a href="" class="btn btn-secondary"> &lt;&gt;Source Code</a>
+                                @if($project->live_link)
+                                    <a target="_blank" href="{{ $project->live_link }}" class="btn btn-primary"><span class="icon"><i class="fa-solid fa-up-right-from-square"></i></span>Live Preview</a>
+                                @endif
+                                @if($project->source_link)
+                                    <a target="_blank" href="{{ $project->source_link }}" class="btn btn-secondary"> &lt;&gt;Source Code</a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -112,24 +115,17 @@
             <div class="image-container"><img
                     src="{{ asset('uploads/images/frontend/about_image/' . $frontend->about_image) }}" alt=""></div>
             <div class="content">
+                @if($frontend->about_youtube_video_id)
                 <div class="video-container">
                     <div class="video-intro">
-                        <img src="{{ asset('assets/images/youtube-thumbnail.jpg') }}" alt="Video-Intro">
-                        <a href="https://www.youtube.com/watch?v=DEeaT6FxEws" class="play-icon popup-youtube"><img
+                        <img src="https://img.youtube.com/vi/{{ $frontend->about_youtube_video_id }}/maxresdefault.jpg" alt="Video-Intro">
+                        <a href="https://www.youtube.com/watch?v={{ $frontend->about_youtube_video_id }}" class="play-icon popup-youtube"><img
                                 src="assets/images/youtube.png" alt="Youtube Play"></a>
                     </div>
                 </div>
+                @endif
                 <h4>{{ $frontend->about_story_title }}</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, veritatis eius sunt et molestias
-                    veniam neque vitae amet atque. Ab, placeat? Quisquam itaque quas inventore distinctio quaerat, animi
-                    quam error! Eum hic laudantium, debitis repellendus est nihil cupiditate sit molestiae libero et id
-                    voluptates corporis consequuntur itaque ipsam optio exercitationem facilis tenetur recusandae
-                    voluptatem consequatur fuga accusamus. Quam, consectetur deleniti omnis dignissimos numquam non.
-                    Modi perferendis reprehenderit dicta. Labore sit delectus at ab illum culpa sapiente cum facilis
-                    reprehenderit eos officia voluptate libero consequuntur nemo explicabo molestiae voluptas reiciendis
-                    repellat aliquam aliquid, laudantium, porro ipsum ipsa. Consequuntur architecto modi eum corporis
-                    autem. Recusandae provident corrupti officiis labore quas vitae at. Molestiae obcaecati dolores
-                    temporibus asperiores non sed fugit ad dicta!</p>
+                <p>{!! $frontend->about_story_html !!}</p>
                 <h4>Skills</h4>
                 <div class="skills-icon">
                     @php
@@ -148,44 +144,34 @@
         </div>
     </section>
 
+    @if($testimonials->count() > 0)
     <section class="testimonial-section">
         <div class="section-title-and-desc">
-            <h1 class="section-title">Testimonial</h1>
-            <p class="section-desc">Have a look what people have to say about me</p>
+            <h1 class="section-title">{{ $frontend->testimonial_title }}</h1>
+            <p class="section-desc">{{ $frontend->testimonial_desc }}</p>
         </div>
         <div class="carousel-container">
             <div class="carousel">
                 <div class="slider">
+                    @foreach ($testimonials as $testimonial)
                     <section class="testimonial-wrapper">
                         <div class="testimonial">
-                            <div class="dp"><img src="{{ asset('assets/images/testimonial1.webp') }}" alt=""></div>
-                            <h5 class="name">Devid vescar</h5>
-                            <div class="degisnation">Agency Owner</div>
-                            <p class="testimonial-message">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero consectetur, veritatis id laborum odio animi expedita nihil quibusdam minus repellendus molestias magnam voluptatum ullam eveniet esse rerum, ipsum ratione quisquam recusandae? Quasi beatae id natus. Nisi, beatae eum? Porro, ad! Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quibusdam debitis vel fugit id cum deleniti culpa est. Aspernatur dolore, quaerat dicta voluptatum ea dolorem a necessitatibus minus quasi eos est adipisci voluptatibus animi iste eaque? Incidunt beatae veniam amet explicabo quo dolorem unde, modi eveniet dolorum delectus aspernatur iure ut minus reprehenderit nam magni nobis pariatur, ipsum et a voluptas. Totam dicta nostrum, quas dolorem ipsam blanditiis atque et praesentium consequuntur! Quam illo rerum assumenda impedit eligendi ut beatae aliquam ducimus deserunt perspiciatis provident, omnis aperiam iure dolorum amet libero minus soluta repellat quas fuga sed aspernatur. Consectetur laborum vero molestiae ipsum, dicta harum maxime exercitationem amet tenetur consequatur, mollitia praesentium illum dolorum corporis temporibus accusantium, aut eveniet. Quod. </p>
+                            <div class="dp"><img src="{{ asset('uploads/images/testimonial/'.$testimonial->image) }}" alt="{{ $testimonial->image }}"></div>
+                            <h5 class="name">{{ $testimonial->name }}</h5>
+                            @if($testimonial->designation) <div class="designation">{{ $testimonial->designation }}</div> @endif
+                            <p class="testimonial-message"> <span class="quote-mark"><i class="fa-solid fa-quote-left"></i></span> {{ $testimonial->message }} </p>
                             <div class="star-container">
+                                @for ($star_count = 0; $star_count < 5; $star_count++)
+                                @if($star_count < $testimonial->stars)
                                 <x-svgs.star-fill width="25"/> 
-                                <x-svgs.star-fill width="25"/> 
-                                <x-svgs.star-fill width="25"/> 
-                                <x-svgs.star-fill width="25"/> 
+                                @else
                                 <x-svgs.star-outline width="20"/> 
+                                @endif 
+                                @endfor
                             </div>
                         </div>
                     </section>
-                    <section class="testimonial-wrapper">
-                        <div class="testimonial">
-                            <div class="dp"><img src="{{ asset('assets/images/testimonial1.webp') }}" alt=""></div>
-                            <h5 class="name">Devid vescar</h5>
-                            <div class="degisnation">Agency Owner</div>
-                            <p class="testimonial-message">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero consectetur, veritatis id laborum odio animi expedita nihil quibusdam minus repellendus molestias magnam voluptatum ullam eveniet esse rerum, ipsum ratione quisquam recusandae? Quasi beatae id natus. Nisi, beatae eum? Porro, ad! </p>
-                            <div class="star-container">
-                                <x-svgs.star-fill width="25"/> 
-                                <x-svgs.star-fill width="25"/> 
-                                <x-svgs.star-fill width="25"/> 
-                                <x-svgs.star-fill width="25"/> 
-                                <x-svgs.star-outline width="20"/> 
-                            </div>
-                        </div>
-                    </section>
+                    @endforeach
                 </div>
                 <div class="controls">
                     <div class="prev arrow">
@@ -202,63 +188,40 @@
             </div>
         </div>
     </section>
+    @endif
 
+    @if($blogs->count() > 0)
     <section class="blog-section">
         <div class="section-title-and-desc">
             <h1 class="section-title">{{ $frontend->blog_title }}</h1>
             <p class="section-desc">{{ $frontend->blog_desc }}</p>
         </div>
         <div class="blog-container">
+            @foreach ($blogs as $blog)
             <div class="blog">
                 <div class="feature-image">
-                    <img src="/assets/images/4884785.jpg" alt="">
+                    <img src="{{ asset("uploads/images/blogs/$blog->hero_image") }}" alt="">
                 </div>
                 <div class="content-container">
-                    <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span>
+                    <div class="tag-container">
+                        @foreach ($blog->tags as $tag)
+                        <span class="tag" style="background-color: {{ $tag->color }}; color: initial;">{{ $tag->value }}</span>
+                        @endforeach
                     </div>
-                    <a href="{{ route('blogs.details', 1) }}" class="title">what is a javascript?</a>
-                    <div class="content">JavaScript is a programming language and core technology of the web platform,
-                        alongside HTML and CSS. Ninety-nine percent of websites...
-                        <a href="{{ route('blogs.details', 1) }}" class="link">Read more</a>
+                    <a href="{{ route('blogs.details', 1) }}" class="title">{{ $blog->blog_title }}</a>
+                    <div class="content">{{ $blog->blog_title }}
+                        <a href="{{ route('blogs.details', $blog->id) }}" class="link">Read more</a>
                     </div>
-                    <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
+                    <div class="timestamp"><i class="fa-solid fa-clock"></i> {{ $blog->created_at->diffForHumans() }}</div>
                 </div>
             </div>
-            <div class="blog">
-                <div class="feature-image">
-                    <img src="/assets/images/18697.jpg" alt="">
-                </div>
-                <div class="content-container">
-                    <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span>
-                    </div>
-                    <a href="{{ route('blogs.details', 1) }}" class="title">what is a javascript?</a>
-                    <div class="content">JavaScript is a programming language and core technology of the web platform,
-                        alongside HTML and CSS. Ninety-nine percent of websites...
-                        <a href="{{ route('blogs.details', 1) }}" class="link">Read more</a>
-                    </div>
-                    <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
-                </div>
-            </div>
-            <div class="blog">
-                <div class="feature-image">
-                    <img src="/assets/images/professional-programmer-working-late-dark-offic.jpg" alt="">
-                </div>
-                <div class="content-container">
-                    <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span>
-                    </div>
-                    <a href="{{ route('blogs.details', 1) }}" class="title">what is a javascript?</a>
-                    <div class="content">JavaScript is a programming language and core technology of the web platform,
-                        alongside HTML and CSS. Ninety-nine percent of websites...
-                        <a href="{{ route('blogs.details', 1) }}" class="link">Read more</a>
-                    </div>
-                    <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="see-more-container">
             <a href="{{ route('blogs') }}" class="btn btn-primary see-more-button">See More</a>
         </div>
     </section>
+    @endif
 
     <section class="contact-section">
         <div class="section-title-and-desc">

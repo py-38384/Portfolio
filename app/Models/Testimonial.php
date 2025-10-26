@@ -4,11 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class Testimonial extends Model
 {
     protected $guarded = ['id', 'created_at', 'updated_at'];
-    protected $casts = [
-        'created_at' => 'datetime',
-        'tags' => 'object'
-    ];
 }
