@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\EditorJsDataToHtml;
 use App\Models\Blog;
 use App\Models\Console;
 use App\Models\Project;
@@ -23,8 +24,7 @@ class SiteController extends Controller
         return view('projects.portfolio');
     }
     public function portfolios_details(Project $project){
-        $project->descriptionHtml = $this->EditorJsDataToHtml($project->description);
-        $project->descriptionHtml;
+        $project->descriptionHtml = EditorJsDataToHtml::parse($project->description);
         return view('projects.details', compact('project'));
     }
     public function blogs(){

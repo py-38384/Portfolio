@@ -11,7 +11,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton('editor_js_data_to_html_service', function ($app){
+            return new \App\Library\EditorJsDataToHtmlService();
+        });
     }
 
     /**

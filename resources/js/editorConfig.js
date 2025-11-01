@@ -13,48 +13,10 @@ import TextStyleTool from "@skchawala/editorjs-text-style";
 import Strikethrough from '@sotaproject/strikethrough';
 import { StyleInlineTool } from "editorjs-style"; 'editorjs-style';
 import EmojiPickerTool from '@plebjs/editorjs-emoji-picker-tool';
+import HtmlTool from "./HtmlToolEditorBlock";
 
 
 const editorjs = document.querySelector('#editorjs')
-
-class HtmlViewTool {
-  static get toolbox() {
-    return { title: 'HTML', icon: '<>' };
-  }
-
-  render() {
-    this.wrapper = document.createElement('div');
-
-    this.textarea = document.createElement('textarea');
-    this.textarea.placeholder = 'Write your HTML code here...';
-    this.textarea.classList.add('cdx-input');
-    this.textarea.style.height = "70px";
-    this.textarea.addEventListener('input', () => this.updatePreview());
-
-    this.preview = document.createElement('div');
-    this.preview.classList.add('html-preview');
-    this.preview.style.borderRadius = '5px';
-    this.preview.style.padding = '10px';
-    this.preview.style.marginTop = '10px';
-
-    this.wrapper.append(this.textarea, this.preview);
-    return this.wrapper;
-  }
-
-  updatePreview() {
-    this.preview.innerHTML = this.textarea.value;
-  }
-
-  save() {
-    return { html: this.textarea.value };
-  }
-
-  renderSaved(data) {
-    const div = document.createElement('div');
-    div.innerHTML = data.html;
-    return div;
-  }
-}
 
 if(editorjs){
     window.editor = new EditorJS({
@@ -136,7 +98,7 @@ if(editorjs){
             },
             strikethrough: Strikethrough,
             StyleInlineTool: StyleInlineTool,
-            htmlview: HtmlViewTool,
+            html: HtmlTool,
         },
         data: window.editor_content,
     });
