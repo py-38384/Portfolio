@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageUploadController extends Controller
 {
-    public function uploadFile(Request $request)
+    public function uploadImage(Request $request)
     {
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -29,7 +29,7 @@ class ImageUploadController extends Controller
     /**
      * Handle image upload from external URL.
      */
-    public function uploadByUrl(Request $request)
+    public function uploadImageByUrl(Request $request)
     {
         $url = $request->input('url');
         if (!$url) {
@@ -60,5 +60,20 @@ class ImageUploadController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => 0, 'message' => $e->getMessage()]);
         }
+    }
+    public function uploadFile(Request $request){
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $path = $file->store('uploads', 'public');
+
+            return response()->json([
+                'success' => 1,
+                'file' => [
+                    'url' => asset($path)
+                ]
+            ]);
+        }
+
+        return response()->json(['success' => 0, 'message' => 'No file uploaded']);
     }
 }

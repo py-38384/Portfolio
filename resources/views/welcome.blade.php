@@ -80,7 +80,7 @@
                         </div>
                         <div class="details-container">
                             <div class="category">{{ $project->category->name }}</div>
-                            <a href="/portfolios/1" class="title">{{ $project->project_title }}</a>
+                            <a href="{{ route('portfolios.details',$project->id) }}" class="title">{{ $project->project_title }}</a>
                             <div class="description">{{ $project->short_description }}</div>
                             <div class="technologis">
                                 @foreach ($project->tags as $tag)

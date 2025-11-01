@@ -22,8 +22,10 @@ class SiteController extends Controller
     public function portfolios(){
         return view('projects.portfolio');
     }
-    public function portfolios_details($id){
-        return view('projects.details');
+    public function portfolios_details(Project $project){
+        $project->descriptionHtml = $this->EditorJsDataToHtml($project->description);
+        $project->descriptionHtml;
+        return view('projects.details', compact('project'));
     }
     public function blogs(){
         return view('blogs');

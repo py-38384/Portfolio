@@ -8,15 +8,17 @@ use App\Http\Controllers\ImageUploadController;
 
 Route::get('/', [SiteController::class, 'home'])->name('home');
 Route::get('/portfolios', [SiteController::class, 'portfolios'])->name('portfolios');
-Route::get('/portfolios/{id}', [SiteController::class, 'portfolios_details'])->name('portfolios.details');
+Route::get('/portfolios/{project}', [SiteController::class, 'portfolios_details'])->name('portfolios.details');
 
 Route::get('/blogs', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 Route::get('/test', [SiteController::class, 'test'])->name('test');
 
-Route::post('/upload-image', [ImageUploadController::class, 'uploadFile']);
-Route::post('/fetch-image', [ImageUploadController::class, 'uploadByUrl']);
+Route::post('/upload-image', [ImageUploadController::class, 'uploadImage']);
+Route::post('/fetch-image', [ImageUploadController::class, 'uploadImageByUrl']);
+Route::post('/upload-file', [ImageUploadController::class, 'uploadFile']);
+Route::post('/fetch-image', [ImageUploadController::class, 'uploadFileByUrl']);
 Route::post('/save-project-darft', [BackendController::class, 'save_project_darft'])->name('save-project-darft');
 Route::post('/save-blog-darft', [BackendController::class, 'save_blog_darft'])->name('save-blog-darft');
 

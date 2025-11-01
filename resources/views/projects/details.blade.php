@@ -61,7 +61,7 @@
                             <a href="" class="btn btn-secondary"> &lt;&gt;Source Code</a>
                         </div>
                         <!-- content Start -->
-                        <h2 style="color: #2d3436; font-size: 28px; margin-bottom: 8px;">🛍️ Advanced E-Commerce
+                        <!-- <h2 style="color: #2d3436; font-size: 28px; margin-bottom: 8px;">🛍️ Advanced E-Commerce
                             Platform</h2>
                         <h3 style="color: #0984e3; font-size: 20px; margin-top: 0;">Multi-Vendor Marketplace with Modern
                             Architecture</h3>
@@ -99,8 +99,10 @@
                             <b>📅 Last Updated:</b> <span style="color: #2d3436;">Sep 29, 2025</span> &nbsp; | &nbsp;
                             <b>Status:</b> <span style="color: #00b894;">Active</span> &nbsp; | &nbsp;
                             <b>Category:</b> <span style="color: #0984e3;">Technology</span>
-                        </p>
+                        </p> -->
                         <!-- content end -->
+
+                        {!! $project->descriptionHtml !!}
 
                     </div>
                 </div>
