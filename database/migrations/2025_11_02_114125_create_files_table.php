@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('project_title');
-            $table->text('short_description');
-            $table->mediumText('description');
-            $table->enum('status',['pending','published']);
-            $table->string('hero_image');
-            $table->text('gallery_image')->nullable();
+            $table->string('file_type');
+            $table->string('file_id');
+            $table->string('path');
+            $table->string('size');
+            $table->string('filename');
+            $table->boolean('public');
+            $table->string('stored_path',300);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('files');
     }
 };

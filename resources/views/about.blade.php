@@ -12,14 +12,14 @@
             <div class="image-container"><img src="{{ asset('uploads/images/frontend/about_image/'.$frontend->about_image) }}" alt=""></div>
             <div class="video-container">
                 <div class="video-intro">
-                    <img src="{{ asset('assets/images/youtube-thumbnail.jpg') }}" alt="Video-Intro">
-                    <a href="https://www.youtube.com/watch?v=DEeaT6FxEws" class="play-icon popup-youtube"><img
-                            src="assets/images/youtube.png" alt="Youtube Play"></a>
+                    <img src="https://img.youtube.com/vi/{{ $frontend->about_youtube_video_id }}/maxresdefault.jpg" alt="Video-Intro">
+                        <a href="https://www.youtube.com/watch?v={{ $frontend->about_youtube_video_id }}" class="play-icon popup-youtube"><img
+                                src="assets/images/youtube.png" alt="Youtube Play"></a>
                 </div>
             </div>
             <div class="content">
                 <h4>{{ $frontend->about_story_title }}</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio, veritatis eius sunt et molestias veniam neque vitae amet atque. Ab, placeat? Quisquam itaque quas inventore distinctio quaerat, animi quam error! Eum hic laudantium, debitis repellendus est nihil cupiditate sit molestiae libero et id voluptates corporis consequuntur itaque ipsam optio exercitationem facilis tenetur recusandae voluptatem consequatur fuga accusamus. Quam, consectetur deleniti omnis dignissimos numquam non. Modi perferendis reprehenderit dicta. Labore sit delectus at ab illum culpa sapiente cum facilis reprehenderit eos officia voluptate libero consequuntur nemo explicabo molestiae voluptas reiciendis repellat aliquam aliquid, laudantium, porro ipsum ipsa. Consequuntur architecto modi eum corporis autem. Recusandae provident corrupti officiis labore quas vitae at. Molestiae obcaecati dolores temporibus asperiores non sed fugit ad dicta!</p>
+                <p>{!! $frontend->about_story_html !!}</p>
                 <h4>Skills</h4>
                 <div class="skills-icon">
                     @php
@@ -30,7 +30,7 @@
                     @endforeach
                 </div>
                 <div class="CTA-button">
-                    <a href="" class="btn-primary">{{ $frontend->about_button_text }}</a>
+                    <a href="{{ $frontend->about_button_link }}" target="_blank" class="btn-primary">{{ $frontend->about_button_text }}</a>
                 </div>
                 
             </div>

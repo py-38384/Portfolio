@@ -313,6 +313,7 @@ nav ul li .link:hover{
     border: 1px solid rgb(230 230 230);
     border-radius: 5px;
     background-color: rgb(247 247 247);
+    width: 100%;
 }
 .details-container .category {
     font-size: 15px;

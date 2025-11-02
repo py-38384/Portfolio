@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('blogs', function (Blueprint $table) {
             $table->text('tags')->nullable();
             $table->string('slug', 500)->nullable();
+            $table->boolean('is_featured')->after('tags')->default(false);
         });
     }
 
@@ -25,6 +26,7 @@ return new class extends Migration
         Schema::table('blogs', function (Blueprint $table) {
             $table->dropColumn('tags');
             $table->dropColumn('slug');
+            $table->dropColumn('is_featured');
         });
     }
 };

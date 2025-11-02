@@ -14,9 +14,10 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->foreignIdFor(Category::class)->nullable()->after('gallery_image')->constrained()->nullOnDelete();
-            $table->string('live_link')->nullable();
-            $table->string('source_link')->nullable();
-            $table->text('tags')->nullable();
+            $table->string('live_link')->after('category_id')->nullable();
+            $table->string('source_link')->after('live_link')->nullable();
+            $table->text('tags')->after('source_link')->nullable();
+            $table->boolean('is_featured')->after('tags')->default(false);
         });
     }
 
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->dropColumn('live_link');
             $table->dropColumn('source_link');
             $table->dropColumn('tags');
+            $table->dropColumn('is_featured');
         });
     }
 };

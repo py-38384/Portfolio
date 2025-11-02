@@ -147,4 +147,7 @@ trait CommonFunctions
         $b = rand(0, 255);
         return "rgb($r, $g, $b)";
     }
+    function getSlug($source){
+        return Str::slug($source);
+    }
 }

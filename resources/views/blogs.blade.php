@@ -8,45 +8,27 @@
             </div>
         </div>
         <div class="blog-container blog-container-all">
+            @foreach ($blogs as $blog)
             <div class="blog blog-all">
                 <div class="feature-image">
-                    <img src="/assets/images/4884785.jpg" alt="">
+                    <img src="{{ asset("uploads/images/blogs/$blog->hero_image") }}" alt="">
                 </div>
                 <div class="content-container">
-                    <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span></div>
-                    <h4 class="title">what is a javascript?</h4>
-                    <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites...
-                    <a href="" class="link">Read more</a>
+                    <div class="tag-container">
+                        @foreach ($blog->tags as $tag)
+                        <span class="tag" style="background-color: {{ $tag->color }}; color: {{ getTextColorBasedOnBackground($tag->color) }}">{{ $tag->value }}</span>
+                        @endforeach
                     </div>
-                    <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
+                    <a href="{{ route('blogs.details', $blog->slug) }}" class="title">{{ $blog->blog_title }}</a>
+                    <div class="content">
+                        {{ $blog->short_description }}
+                        <a href="{{ route('blogs.details', $blog->slug) }}" class="link">Read more</a>
+                    </div>
+                    <div class="timestamp"><i class="fa-solid fa-clock"></i> {{ $blog->created_at->diffForHumans() }}</div>
                 </div>
             </div>
-            <div class="blog blog-all">
-                <div class="feature-image">
-                    <img src="/assets/images/18697.jpg" alt="">
-                </div>
-                <div class="content-container">
-                    <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span></div>
-                    <h4 class="title">what is a javascript?</h4>
-                    <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites...
-                    <a href="" class="link">Read more</a>
-                    </div>
-                    <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
-                </div>
-            </div>
-            <div class="blog blog-all">
-                <div class="feature-image">
-                    <img src="/assets/images/professional-programmer-working-late-dark-offic.jpg" alt="">
-                </div>
-                <div class="content-container">
-                    <div class="tag-container"><span class="tag">Technology</span><span class="tag">Javascript</span></div>
-                    <h4 class="title">what is a javascript?</h4>
-                    <div class="content">JavaScript is a programming language and core technology of the web platform, alongside HTML and CSS. Ninety-nine percent of websites...
-                    <a href="" class="link">Read more</a>    
-                    </div>
-                    <div class="timestamp"><i class="fa-solid fa-clock"></i> 15 min ago</div>
-                </div>
-            </div>
+            @endforeach
+            
         </div>
     </section>
 </x-guest-layout>

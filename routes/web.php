@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\BackendController;
@@ -13,12 +14,11 @@ Route::get('/portfolios/{project}', [SiteController::class, 'portfolios_details'
 Route::get('/blogs', [SiteController::class, 'blogs'])->name('blogs');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
-Route::get('/test', [SiteController::class, 'test'])->name('test');
 
-Route::post('/upload-image', [ImageUploadController::class, 'uploadImage']);
-Route::post('/fetch-image', [ImageUploadController::class, 'uploadImageByUrl']);
-Route::post('/upload-file', [ImageUploadController::class, 'uploadFile']);
-Route::post('/fetch-image', [ImageUploadController::class, 'uploadFileByUrl']);
+Route::post('/upload-image', [UploadController::class, 'uploadImage']);
+Route::post('/fetch-image', [UploadController::class, 'uploadImageByUrl']);
+Route::post('/upload-file', [UploadController::class, 'uploadFile']);
+Route::post('/fetch-image', [UploadController::class, 'uploadFileByUrl']);
 Route::post('/save-project-darft', [BackendController::class, 'save_project_darft'])->name('save-project-darft');
 Route::post('/save-blog-darft', [BackendController::class, 'save_blog_darft'])->name('save-blog-darft');
 
@@ -80,14 +80,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/social_icon/{social_icon}/update', [BackendController::class, 'social_icon_store'])->name('update');
         Route::delete('/social_icon/{social_icon}/delete', [BackendController::class, 'social_icon_delete'])->name('delete');
     });
+    Route::name('file.')->group(function () {
+        Route::get('/file/index', [BackendController::class, 'file_index'])->name('index');
+        Route::get('/file/create', [BackendController::class, 'file_create'])->name('create');
+        Route::post('/file/store', [BackendController::class, 'file_store'])->name('store');
+        Route::get('/file/{file}/edit', [BackendController::class, 'file_edit'])->name('edit');
+        Route::get('/file/{file:file_id}', [BackendController::class, 'file_show'])->name('show');
+        Route::put('/file/{file}/update', [BackendController::class, 'file_store'])->name('update');
+        Route::delete('/file/{file}/delete', [BackendController::class, 'file_delete'])->name('delete');
+    });
 });
 Route::post('/contact-message', [BackendController::class, 'save_contact'])->name('save.contact');
-Route::get('/blogs/{id}', [SiteController::class, 'blogs_details'])->name('blogs.details');
+Route::get('/blogs/{blog:slug}', [SiteController::class, 'blogs_details'])->name('blogs.details');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/icons', [ProfileController::class, 'updateIcons'])->name('profile.icons');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('/f/{path}', [SiteController::class, 'view_file'])
+    ->where('path', '.*')
+    ->name('view.file');
 require __DIR__ . '/auth.php';

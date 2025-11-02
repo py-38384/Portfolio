@@ -16,6 +16,9 @@
                         <div class="pt-6 px-6 text-xl font-bold text-gray-900 dark:text-gray-100" id="product-count">
                             Contact Messages
                         </div>
+                        <div class="pt-6 px-6 text-gray-900 dark:text-gray-100" id="product-count">
+                            Total Contacts = {{ $contacts_count }}
+                        </div>
                         <div class="table-card">
                             <table class="project-table">
                                 <thead>

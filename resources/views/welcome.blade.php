@@ -73,7 +73,7 @@
                 @foreach ($projects as $project)
                     <div class="portfolio">
                         <div class="image-wrapper">
-                            <a class="image-container" href="/assets/images/deshivendor.png">
+                            <a class="image-container" href="{{ asset('uploads/images/projects/' . $project->hero_image) }}">
                                 <img src="{{ asset('uploads/images/projects/' . $project->hero_image) }}"
                                     alt="{{ $project->project_title }}">
                             </a>
@@ -137,7 +137,7 @@
                     @endforeach
                 </div>
                 <div class="CTA-button">
-                    <a href="" class="btn-primary">{{ $frontend->about_button_text }}</a>
+                    <a href="{{ $frontend->about_button_link }}" class="btn-primary">{{ $frontend->about_button_text }}</a>
                 </div>
 
             </div>
@@ -205,12 +205,12 @@
                 <div class="content-container">
                     <div class="tag-container">
                         @foreach ($blog->tags as $tag)
-                        <span class="tag" style="background-color: {{ $tag->color }}; color: initial;">{{ $tag->value }}</span>
+                        <span class="tag" style="background-color: {{ $tag->color }}; color: {{ getTextColorBasedOnBackground($tag->color) }}">{{ $tag->value }}</span>
                         @endforeach
                     </div>
-                    <a href="{{ route('blogs.details', 1) }}" class="title">{{ $blog->blog_title }}</a>
+                    <a href="{{ route('blogs.details', $blog->slug) }}" class="title">{{ $blog->blog_title }}</a>
                     <div class="content">{{ $blog->blog_title }}
-                        <a href="{{ route('blogs.details', $blog->id) }}" class="link">Read more</a>
+                        <a href="{{ route('blogs.details', $blog->slug) }}" class="link">Read more</a>
                     </div>
                     <div class="timestamp"><i class="fa-solid fa-clock"></i> {{ $blog->created_at->diffForHumans() }}</div>
                 </div>

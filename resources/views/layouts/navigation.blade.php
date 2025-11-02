@@ -36,6 +36,9 @@
                     <x-nav-link :href="route('social_icon.index')" :active="request()->routeIs('social_icon.*')">
                         {{ __('Social Icon') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('file.index')" :active="request()->routeIs('file.*')">
+                        {{ __('Files') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -112,6 +115,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('social_icon.index')" :active="request()->routeIs('social_icon.*')">
                 {{ __('Social Icon') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('file.index')" :active="request()->routeIs('file.*')">
+                {{ __('Files') }}
             </x-responsive-nav-link>
         </div>
 

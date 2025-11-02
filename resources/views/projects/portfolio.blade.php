@@ -8,69 +8,38 @@
             </div>
         </div>
         <div class="portfolio-container">
-            <div class="portfolio">
-                <div>
-                    <div class="image-container">
-                        <img src="/assets/images/deshivendor.png" alt="">
+            @foreach ($projects as $project)
+                <div class="portfolio">
+                    <div class="image-wrapper">
+                        <a class="image-container" href="{{ asset('uploads/images/projects/' . $project->hero_image) }}">
+                            <img src="{{ asset('uploads/images/projects/' . $project->hero_image) }}"
+                                alt="{{ $project->project_title }}">
+                        </a>
+                    </div>
+                    <div class="details-container">
+                        <div class="category">{{ $project->category->name }}</div>
+                        <a href="{{ route('portfolios.details', $project->id) }}"
+                            class="title">{{ $project->project_title }}</a>
+                        <div class="description">{{ $project->short_description }}</div>
+                        <div class="technologis">
+                            @foreach ($project->tags as $tag)
+                                <span class="technology">{{ $tag }}</span>
+                            @endforeach
+                        </div>
+                        <div class="button-container">
+                            @if($project->live_link)
+                                <a target="_blank" href="{{ $project->live_link }}" class="btn btn-primary"><span
+                                        class="icon"><i class="fa-solid fa-up-right-from-square"></i></span>Live Preview</a>
+                            @endif
+                            @if($project->source_link)
+                                <a target="_blank" href="{{ $project->source_link }}" class="btn btn-secondary"> &lt;&gt;Source
+                                    Code</a>
+                            @endif
+                        </div>
                     </div>
                 </div>
-                <div class="details-container">
-                    <div class="category">E-Commerce</div>
-                    <h5 class="title">Multi Vendor E-Commerce</h5>
-                    <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eius odit dolorem voluptate vel rem pariatur? Ratione praesentium beatae corporis illo ut repellat, libero nihil. Laborum illo esse maiores nostrum!</div>
-                    <div class="technologis">
-                        <span class="technology">HTML</span>
-                        <span class="technology">CSS</span>
-                        <span class="technology">Javascript</span>
-                    </div>
-                    <div class="button-container">
-                        <a href="" class="btn btn-primary"><span class="icon"><i class="fa-solid fa-up-right-from-square"></i></span>Live Preview</a>
-                        <a href="" class="btn btn-secondary"> &lt;&gt;Source Code</a>
-                    </div>
-                </div>
-            </div>
-            <div class="portfolio">
-                <div>
-                    <div class="image-container">
-                        <img src="/assets/images/Smart-Learning.png" alt="">
-                    </div>
-                </div>
-                <div class="details-container">
-                    <div class="category">E-Learning</div>
-                    <h5 class="title">A Fontend Design For A E-Learning Platform</h5>
-                    <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eius odit dolorem voluptate vel rem pariatur? Ratione praesentium beatae corporis illo ut repellat, libero nihil. Laborum illo esse maiores nostrum!</div>
-                    <div class="technologis">
-                        <span class="technology">HTML</span>
-                        <span class="technology">CSS</span>
-                        <span class="technology">Javascript</span>
-                    </div>
-                    <div class="button-container">
-                        <a href="" class="btn btn-primary"><span class="icon"><i class="fa-solid fa-up-right-from-square"></i></span>Live Preview</a>
-                        <a href="" class="btn btn-secondary"> &lt;&gt;Source Code</a>
-                    </div>
-                </div>
-            </div>
-            <div class="portfolio">
-                <div>
-                    <div class="image-container">
-                        <img src="/assets/images/ultimateorganiclife.png" alt="">
-                    </div>
-                </div>
-                <div class="details-container">
-                    <div class="category">E-Commerce</div>
-                    <h5 class="title">A Organic Beauty Product Selling E-Commerce Website</h5>
-                    <div class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eius odit dolorem voluptate vel rem pariatur? Ratione praesentium beatae corporis illo ut repellat, libero nihil. Laborum illo esse maiores nostrum!</div>
-                    <div class="technologis">
-                        <span class="technology">HTML</span>
-                        <span class="technology">CSS</span>
-                        <span class="technology">Javascript</span>
-                    </div>
-                    <div class="button-container">
-                        <a href="" class="btn btn-primary"> <span class="icon"><i class="fa-solid fa-up-right-from-square"></i></span>Live Preview</a>
-                        <a href="" class="btn btn-secondary"> &lt;&gt;Source Code</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
+        <div class="mt-10">{{ $projects->links() }}</div>
     </section>
 </x-guest-layout>

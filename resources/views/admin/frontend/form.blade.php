@@ -221,6 +221,13 @@
             autocomplete="name" />
           <x-input-error class="mt-2" :messages="$errors->get('about_button_text')" />
         </div>
+        <div class="form-group">
+          <x-input-label for="about_button_link" :value="__('About Button Link')" />
+          <x-text-input id="about_button_link" name="about_button_link" type="text" placeholder="Your Name"
+            class="mt-1 block w-full" value="{{ old('about_button_link', $frontend->about_button_link) }}" required
+            autocomplete="name" />
+          <x-input-error class="mt-2" :messages="$errors->get('about_button_link')" />
+        </div>
 
         <div class="form-group">
           <x-input-label for="blog_title" :value="__('Blog Title')" />

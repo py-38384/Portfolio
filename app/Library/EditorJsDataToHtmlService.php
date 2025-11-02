@@ -164,12 +164,15 @@ class EditorJsDataToHtmlService
             $html .= "<pre><code>{$escaped}</code></pre>";
         }
         if ($block->type == 'attaches') {
-            $html .= '<a class="attachment" ';
-            $html .= 'href="'.$block->data->file->url.'" ';
-            $html .= 'download';
-            $html .= '>';
-            $html .= $block->data->title;
+            $html .= '<div class="download-container">';
+            $html .= '<a href="' . $block->data->file->url . '" download class="download-btn">';
+            $html .= '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">';
+            $html .= '<path d="M.5 9.9v3.6h15V9.9H14v2.5H2V9.9H.5zm7.5-.6V1h-1v8.3L4.4 6.8 3.7 7.5 8 12l4.3-4.5-.7-.7L8 9.3z"/>';
+            $html .= '</svg> ';
+            $html .= htmlspecialchars($block->data->title ?? 'Download', ENT_QUOTES, 'UTF-8');
             $html .= '</a>';
+            $html .= '</div>';
+
         }
         if ($block->type == 'html') {
             $html .= $block->data->value;

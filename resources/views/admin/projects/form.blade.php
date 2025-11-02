@@ -52,7 +52,7 @@
         </div>
         <div class="form-group">
           <div style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap;" class="tag-container">
-            @if (isset($project))
+            @if (isset($project->tags))
               @foreach ($project->tags as $tag)
                 <x-text-input id="tag" name="tag[]" type="text" class="mt-1" value="{{ $tag }}" placeholder="tag"
                 autocomplete="tag"/>
@@ -105,7 +105,7 @@
               }
             </style>
             <div class="preview-container">
-              @if(isset($project))
+              @if(isset($project->gallery_images))
                 @foreach ($project->gallery_images as $gallery_image)
                   <div class="gallery-placeholder">
                     <img class="preview" src="{{ asset('uploads/images/projects/gallery/' . $gallery_image) }}" alt="">
@@ -143,6 +143,16 @@
           <x-input-error class="mt-2" :messages="$errors->get('description')" />
         </div>
 
+        <div class="form-group">
+          <label>Featured</label>
+          <div class="select-wrapper">
+            <select class="custom-select" name="is_featured">
+              <option value=1 @selected(isset($project->is_featured) && $project->is_featured == 1)>yes</option>
+              <option value=2 @selected(isset($project->is_featured) && $project->is_featured == 0)>no</option>
+            </select>
+          </div>
+          <x-input-error class="mt-2" :messages="$errors->get('status')" />
+        </div>
         <div class="form-group">
           <label>Status</label>
           <div class="select-wrapper">

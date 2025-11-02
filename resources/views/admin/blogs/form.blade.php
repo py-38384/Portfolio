@@ -17,7 +17,12 @@
       {{ __($title) }}
     </h2>
   </x-slot>
-
+  <style>
+    .tag-container{
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
   <div class="form-container">
     <div class="form-card">
 
@@ -57,13 +62,17 @@
         <div class="form-group">
           <div style="margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap;" class="tag-container">
             @if (isset($blog->tags))
-              @foreach ($blog->tags as $tag)
-                <x-text-input id="tag" name="tag[]" type="text" class="mt-1" value="{{ $tag->value }}" placeholder="tag"
-                autocomplete="tag"/>
+              @foreach ($blog->tags as $index => $tag)
+                <div style="display: flex; gap: 5px; align-items: center;">
+                  <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" value="{{ $tag->value }}" id="tag" name="tag[{{ $index }}][text]" type="text" placeholder="tag" autocomplete="tag">
+                  <input type="color" value="{{ $tag->color }}" name="tag[{{ $index }}][color]" style="height: 48px; width: 70px;">
+                </div>
               @endforeach
               @else
-              <x-text-input id="tag" name="tag[]" type="text" class="mt-1"  placeholder="tag"
-              autocomplete="tag"/>
+              <div style="display: flex; gap: 5px; align-items: center;">
+                <input class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" id="tag" name="tag[0][text]" type="text" placeholder="tag" autocomplete="tag">
+                <input type="color" name="tag[0][color]" style="height: 48px; width: 70px;">
+              </div>
             @endif
           </div>
           <button type="submit" class="btn-submit add-tag-button">Add Tag</button>
@@ -93,7 +102,11 @@
         </div>
 
         <div style="position: sticky; bottom: 0px; background-color: rgb(255 255 255); padding: 20px 0; z-index: 10;">
+          @if(isset($blog))
+          <button type="submit" class="btn-submit">Update Blog</button>
+          @else
           <button type="submit" class="btn-submit">Save Blog</button>
+          @endif
         </div>
       </form>
     </div>
@@ -160,6 +173,8 @@
       }, 5000);
       const addTagButton = document.querySelector('.add-tag-button');
       const tagContainer = document.querySelector('.tag-container');
+
+      window.tag_index = {{ count($blog->tags) }};
       addTagButton.addEventListener("click", (e) => {
         e.preventDefault();
         const tagInput = document.createElement('input');
@@ -174,13 +189,23 @@
           "dark:focus:ring-indigo-600",
           "rounded-md",
           "shadow-sm",
-          "mt-1",
         );
         tagInput.id = "tag";
-        tagInput.name = "tag[]";
+        tagInput.name = `tag[${window.tag_index}][text]`;
         tagInput.type = "text";
         tagInput.placeholder = "tag";
-        tagContainer.append(tagInput);
+        const colorInput = document.createElement('input');
+        colorInput.type = 'color';
+        colorInput.name = `tag[${window.tag_index}][color]`;
+        colorInput.style.height = '48px';
+        colorInput.style.width = '70px';
+        const container = document.createElement('div');
+        container.style.display = 'flex';
+        container.style.gap = '5px';
+        container.style.alignItems = 'center';
+        container.append(tagInput, colorInput)
+        tagContainer.append(container);
+        window.tag_index++;
       })
     </script>
   @endsection

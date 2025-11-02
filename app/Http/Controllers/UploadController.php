@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
-class ImageUploadController extends Controller
+class UploadController extends Controller
 {
     public function uploadImage(Request $request)
     {
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $path = $file->store('uploads', 'public');
+            $path = $file->store('uploads/editorJs/', 'public');
 
             return response()->json([
                 'success' => 1,
@@ -46,12 +46,12 @@ class ImageUploadController extends Controller
                 }
 
                 $filename = Str::random(10) . '.' . $extension;
-                Storage::disk('public')->put('uploads/' . $filename, $response->body());
+                Storage::disk('public')->put('uploads/editorJs/' . $filename, $response->body());
 
                 return response()->json([
                     'success' => 1,
                     'file' => [
-                        'url' => asset('uploads/' . $filename)
+                        'url' => asset('uploads/editorJs/' . $filename)
                     ]
                 ]);
             }
@@ -64,7 +64,7 @@ class ImageUploadController extends Controller
     public function uploadFile(Request $request){
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $path = $file->store('uploads', 'public');
+            $path = $file->store('uploads/editorJs/', 'public');
 
             return response()->json([
                 'success' => 1,
