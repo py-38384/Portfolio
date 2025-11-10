@@ -30,10 +30,10 @@
 
                 @if($frontend->current_theme_color == 'blue') 
                 /* preset 1 */
-                --primary-body-color: #003BFC17;
-                --active-text-color: #4184ff;
-                --outline-default-color: #4184FF21;
-                --box-shadow-color: #1831534D;
+                --primary-body-color: rgba(242, 242, 242, 1);
+                --active-text-color: rgba(54, 178, 244, 1);
+                --outline-default-color: rgba(0, 177, 255, 0.63);
+                --box-shadow-color: rgba(17, 17, 17, 0.1);
                 @endif
 
                 @if($frontend->current_theme_color == 'navy')
