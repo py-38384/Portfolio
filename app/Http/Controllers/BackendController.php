@@ -34,7 +34,7 @@ class BackendController extends Controller
     public function projects()
     {
         $title = 'Manage Projects';
-        $projects = Project::paginate(10);
+        $projects = Project::latest()->paginate(10);
         $project_count = Project::count();
         return view('admin.projects.index', compact('projects', 'title','project_count'));
     }

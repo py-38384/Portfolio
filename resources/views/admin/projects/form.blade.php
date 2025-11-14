@@ -148,7 +148,7 @@
           <div class="select-wrapper">
             <select class="custom-select" name="is_featured">
               <option value=1 @selected(isset($project->is_featured) && $project->is_featured == 1)>yes</option>
-              <option value=2 @selected(isset($project->is_featured) && $project->is_featured == 0)>no</option>
+              <option value=0 @selected(isset($project->is_featured) && $project->is_featured == 0)>no</option>
             </select>
           </div>
           <x-input-error class="mt-2" :messages="$errors->get('status')" />
